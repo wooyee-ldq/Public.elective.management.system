@@ -1,0 +1,104 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <title>开课申请页面</title>
+    <link rel="stylesheet" href="/static/css/header.css">
+    <link rel="stylesheet" href="/static/css/footer.css">
+    <link rel="stylesheet" href="/static/css/course_apply_page.css">
+    <script type="text/javascript" src="/static/js/jquery-3.4.1/jquery-3.4.1.min.js"></script>
+    <link rel='stylesheet' href='/static/css/bootstrap/css/bootstrap.min.css' />
+    <script type="text/javascript" src="/static/css/bootstrap/js/bootstrap.min.js"></script>
+
+    <script type="text/javascript" src="/static/js/timedropper.js"></script>
+    <link rel="stylesheet" href="/static/css/timedropper.css">
+    
+    <meta name="viewport" ,content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+</head>
+
+<body>
+    {% import "header.html" as h_add%}
+    {{ h_add.header() }}
+    <div id="main">
+        <p>开课申请</p>
+        <ul id="course">
+            <li id="tip">
+                <span class="cname">课程名称</span>
+                <span class="ctype">课程类型</span>
+                <span class="ctime">上课时间</span>
+                <span class="cplace">上课地点</span>
+                <span class="credit">课程学分</span>
+                <span class="cnum">开课人数</span>
+                <span class="ispass">是否通过</span>
+                <span class="isexamine">是否审核</span>
+                <span class="isend">是否结课</span>
+            </li>
+            {% for course in course_li %}
+            <li cid="{{course.id}}" tid="{{course.tid}}">
+                <span class="cname">{{course.cname}}</span>
+                <span class="ctype">{{course.ctype}}</span>
+                <span class="ctime">{{course.classweek}}&nbsp;{{course.classtime}}</span>
+                <span class="cplace">{{course.classplace}}</span>
+                <span class="credit">{{course.credit}}</span>
+                <span class="cnum">{{course.cnum}}</span>
+                <span class="ispass">{{course.ispass}}</span>
+                <span class="isexamine">{{course.isexamine}}</span>
+                <span class="isend">{{course.isend}}</span>
+                <!-- <input class="selbox" type="checkbox" name="cid" value="{{course.id}}"> -->
+            </li>
+            {% endfor %}
+        </ul>
+        <div id="func">
+            <div id="course">
+                <div>
+                    <p>课程名称：</p>
+                    <input id="name" type="text" value="">
+                    <p>类型：</p>
+                    <select id="type">
+                        <option value="非限定性艺术类">非限定性艺术类</option>
+                        <option value="限定性艺术类">限定性艺术类</option>
+                    </select>
+                    <p>学分：</p>
+                    <input id="credit" type="text" value="2">
+                </div>
+                <div>
+                    <p>上课星期：</p>
+                    <select id="week">
+                        <option value="星期一">星期一</option>
+                        <option value="星期二">星期二</option>
+                        <option value="星期三">星期三</option>
+                        <option value="星期四">星期四</option>
+                        <option value="星期五">星期五</option>
+                        <option value="星期六">星期六</option>
+                        <option value="星期日">星期日</option>
+                    </select>
+                    <p>上课时间：</p>
+                    <div id="time" class="input-append date form_datetime">
+                        <input size="20" type="text" value="">
+                    </div>
+                    <p>上课教室：</p>
+                    <select id="rid">
+                        {% for room in room_li %}
+                        <option value="{{room.id}}">{{room.rname}}</option>
+                        {% endfor %}
+                    </select>
+                    <p>课程人数：</p>
+                    <input id="cnum" type="text" value="200">
+                </div>
+                <div>
+                    <!-- <button id="reverse_all" class="btn">反选/</button>
+                    <button id="check_all" class="btn">全选</button> -->
+                    <!-- <button id="refuse" class="btn btn-danger">拒绝</button> -->
+                    <button id="apply" class="btn btn-primary">申请</button>
+                </div>
+            </div>
+        </div>
+    </div>
+    {% import "footer.html" as f_add%}
+    {{ f_add.footer() }}
+    <script src="/static/js/course_apply_page.js"></script>
+</body>
+
+</html>

@@ -1,0 +1,48 @@
+#login{
+    text-align: center;
+    height: 600px;
+    background-color: cadetblue;
+}
+
+#login form{
+    margin: 0px auto;
+    padding: 150px 0px;
+}
+
+#login li{
+    display: inline-block;
+    list-style: none;
+    font-size: 15px;
+    padding: 10px 20px;
+    color: #ffffff;
+}
+
+#login form img{
+    height: 40px;
+    padding: 0px;
+    margin: 0px;
+}
+
+#login input{
+    padding: 10px 5px;
+    margin: 0px;
+}
+
+#login form div{
+    padding: 15px 0px;
+}
+
+#login form ul{
+    margin: 0px;
+}
+
+p{
+    font-size: 25px;
+    color: #ffffff;
+    padding-bottom: 20px;
+}
+
+#login form span{
+    color: #db4335;
+    font-size: 20px;
+}

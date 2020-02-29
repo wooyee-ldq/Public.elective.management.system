@@ -1,0 +1,19 @@
+(pymysql.err.InternalError) (1292, "Incorrect datetime value: '1581493293.48585' for column 'cretime' at row 1")
+[SQL: INSERT INTO notices (text, cretime, isover) VALUES (%(text)s, %(cretime)s, %(isover)s)]
+[parameters: {'text': '测试发布公告', 'cretime': 1581493293.4858518, 'isover': 0}]
+(Background on this error at: http://sqlalche.me/e/2j85)
+(pymysql.err.InternalError) (1292, "Incorrect datetime value: '1581493912.80895' for column 'cretime' at row 1")
+[SQL: INSERT INTO notices (text, cretime, isover) VALUES (%(text)s, %(cretime)s, %(isover)s)]
+[parameters: {'text': '发布公告测试', 'cretime': 1581493912.8089485, 'isover': 0}]
+(Background on this error at: http://sqlalche.me/e/2j85)
+2020-02-12 16:49:29 : filter() got an unexpected keyword argument 'issuper'
+2020-02-12 16:49:33 : filter() got an unexpected keyword argument 'issuper'
+2020-02-12 16:51:05 : filter() got an unexpected keyword argument 'issuper'
+2020-02-12 16:52:08 : filter() got an unexpected keyword argument 'issuper'
+2020-02-12 17:16:11 : filter() got an unexpected keyword argument 'issuper'
+2020-02-12 17:30:11 : (pymysql.err.DataError) (1264, "Out of range value for column 'ano' at row 1")
+[SQL: INSERT INTO `admin` (ano, password, issuper, examine) VALUES (%(ano)s, %(password)s, %(issuper)s, %(examine)s)]
+[parameters: {'ano': 7777680080, 'password': '0fc8440818c2193da5570a669f3aed30', 'issuper': 0, 'examine': 0}]
+(Background on this error at: http://sqlalche.me/e/9h9h)
+2020-02-12 18:01:53 : filter() got an unexpected keyword argument 'issuper'
+2020-02-12 18:40:13 : filter() got an unexpected keyword argument 'issuper'

@@ -1,0 +1,25 @@
+body {
+    margin: 0px;
+    padding: 0px;
+}
+
+.header {
+    height: 30px;
+    background-color: #343536;
+}
+
+.header img {
+    height: 30px;
+    padding: 0px 5px;
+}
+
+#title{
+    height: 15px;
+    line-height: 15px;
+    background-color: #343536;
+    color: #fff;
+    text-align: center;
+    padding-bottom: 5px;
+    font-size: 20px;
+}
+

@@ -1,0 +1,11 @@
+.footer {
+    text-align: center;
+    color: #6b7074;
+    font-size: 12px;
+    font-weight: bold;
+    padding: 20px 0px;
+    border-top: 1px solid #a8aeb4;
+    height: 80px;
+    background-color: darkgrey;
+    /* background-image: url(/static/images/ft.jpg); */
+  }

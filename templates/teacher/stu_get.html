@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <title>学生信息页面</title>
+    <link rel="stylesheet" href="/static/css/header.css">
+    <link rel="stylesheet" href="/static/css/footer.css">
+    <link rel="stylesheet" href="/static/css/stu_get.css">
+</head>
+
+<body>
+    {% import "header.html" as h_add%}
+    {{ h_add.header() }}
+    <div id="main">
+        <p>学生信息</p>
+        <ul id="stu">
+            {% for course in course_li %}
+                <div>课程：{{course.cname}}</div>
+                <li class="tip">
+                    <span class="sno">学号</span>
+                    <span class="sname">姓名</span>
+                    <span class="collegename">学院</span>
+                    <span class="classname">班级</span>
+                    <span class="level">年级</span>
+                    <span class="campus">校区</span>
+                </li>
+                {% for sel in course["stu_li"] %}
+                <li cid="{{sel.stu.id}}">
+                    <span class="sno">{{sel.stu.sno}}</span>
+                    <span class="sname">{{sel.stu.sname}}</span>
+                    <span class="collegename">{{sel.stu.college.collname}}</span>
+                    <span class="classname">{{sel.stu.classes.clname}}</span>
+                    <span class="level">{{sel.stu.level.lname}}</span>
+                    <span class="campus">{{sel.stu.campus.caname}}</span>
+                </li>
+                {% endfor %}
+                <br>
+            {% endfor %}
+        </ul>
+    </div>
+    {% import "footer.html" as f_add%}
+    {{ f_add.footer() }}
+</body>
+
+</html>

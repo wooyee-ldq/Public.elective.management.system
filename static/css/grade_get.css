@@ -1,0 +1,90 @@
+#main{
+    height: 650px;
+    text-align: center;
+}
+
+#main p{
+    font-size: 25px;
+    color: #0088cc;
+    margin: 10px;
+}
+
+#tip{
+    font-size: 22px;
+    color: #ffffff;
+    background-color: cadetblue;
+}
+
+#main ul{
+    margin: 0px auto;
+    width: 1200px;
+    height: 550px;
+    padding: 0px;
+    overflow: auto;
+}
+
+li{
+    list-style: none;
+    text-align: left;
+    font-size: 16px;
+    margin: 2px 0px;
+    background-color: rgb(142, 187, 202)
+}
+
+.cname{
+    display: inline-block;
+    width: 250px;
+    text-align: center;
+    padding: 2px 10px;
+}
+
+.ctype{
+    display: inline-block;
+    width: 150px;
+    text-align: center;
+    padding: 2px 10px;
+}
+
+.time{
+    display: inline-block;
+    width: 200px;
+    text-align: center;
+    padding: 2px 10px;
+}
+
+.isgreat{
+    display: inline-block;
+    width: 100px;
+    text-align: center;
+    padding: 2px 10px;
+}
+
+.tname{
+    display: inline-block;
+    width: 100px;
+    text-align: center;
+    padding: 2px 10px;
+}
+
+.grade{
+    display: inline-block;
+    width: 50px;
+    text-align: center;
+    padding: 2px 10px;
+}
+
+.gradepoint{
+    display: inline-block;
+    width: 50px;
+    text-align: center;
+    padding: 2px 10px;
+}
+
+.credit{
+    display: inline-block;
+    width: 50px;
+    text-align: center;
+    padding: 2px 10px;
+}
+
+

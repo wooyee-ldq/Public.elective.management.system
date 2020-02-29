@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <title>登录页面</title>
+    <link rel="stylesheet" href="/static/css/header.css">
+    <link rel="stylesheet" href="/static/css/footer.css">
+    <link rel="stylesheet" href="/static/css/form.css">
+    <link rel='stylesheet' href='/static/css/bootstrap/css/bootstrap.min.css' />
+</head>
+
+<body>
+    {% import "header.html" as h_add%}
+    {{ h_add.header() }}
+    <div id="login">
+        <form action="{{url_for('app_stu.stu_index')}}" method="POST">
+            {{ form.csrf_token}}
+            <p>学生登录</p>
+            <span>{{ error }}</span>
+            <div>
+                <img src="/static/images/user.png" alt="用户">
+                {{ form.username(class="username", placeholder="用户名") }}
+            </div>
+            <div>
+                <img src="/static/images/pwd.png" alt="密码">
+                {{ form.password(class="password", placeholder="密码") }}
+            </div>
+            <div>
+                {{ form.submit(class="btn btn-primary span4") }}
+            </div>
+
+        </form>
+    </div>
+    {% import "footer.html" as f_add%}
+    {{ f_add.footer() }}
+</body>
+
+</html>

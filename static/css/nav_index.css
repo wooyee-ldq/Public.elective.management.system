@@ -1,0 +1,20 @@
+#main{
+    height: 600px;
+    background-color: cadetblue;
+    text-align: center;
+}
+
+#nav{
+    width: 400px;
+    padding: 200px 0px;
+    margin: 0px auto;
+}
+
+p{
+    text-align: center;
+}
+
+#nav span{
+    font-size: 30px;
+    color: #fff;
+}

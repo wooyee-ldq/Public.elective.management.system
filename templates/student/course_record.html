@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <title>选课记录页面</title>
+    <link rel="stylesheet" href="/static/css/header.css">
+    <link rel="stylesheet" href="/static/css/footer.css">
+    <link rel="stylesheet" href="/static/css/course_record.css">
+</head>
+
+<body>
+    {% import "header.html" as h_add%}
+    {{ h_add.header() }}
+    <div id="main">
+        <p>选课记录</p>
+        <ul id="course">
+            <li id="tip">
+                <span class="cname">课程名称</span>
+                <span class="ctype">课程类型</span>
+                <span class="ctime">上课时间</span>
+                <span class="cplace">上课地点</span>
+                <span class="tname">课程教师</span>
+                <span class="credit">学分</span>
+                <span class="cretime">选课时间</span>
+                <span class="isend">是否结束</span>
+            </li>
+            {% for sel in selcourse_li %}
+            <li cid="{{sel.id}}">
+                <span class="cname">{{sel.course.cname}}</span>
+                <span class="ctype">{{sel.course.ctype}}</span>
+                <span class="ctime">{{sel.course.classweek}}&nbsp;{{sel.course.classtime}}</span>
+                <span class="cplace">{{sel.course.classroom.rname}}</span>
+                <span class="tname">{{sel.course.teacher.tname}}</span>
+                <span class="credit">{{sel.course.credit}}</span>
+                <span class="cretime">{{sel.cretime}}</span>
+                {% if sel.course.isend == 1 %}
+                <span class="isend">是</span>
+                {% endif %}
+                {% if sel.course.isend == 0 %}
+                <span class="isend">否</span>
+                {% endif %}
+            </li>
+            {% endfor %}
+        </ul>
+    </div>
+    {% import "footer.html" as f_add%}
+    {{ f_add.footer() }}
+</body>
+</html>

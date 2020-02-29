@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <title>成绩查看页面</title>
+    <link rel="stylesheet" href="/static/css/header.css">
+    <link rel="stylesheet" href="/static/css/footer.css">
+    <link rel="stylesheet" href="/static/css/grade_get.css">
+</head>
+
+<body>
+    {% import "header.html" as h_add%}
+    {{ h_add.header() }}
+    <div id="main">
+        <p>成绩查看</p>
+        <ul id="achi">
+            <li id="tip">
+                <span class="cname">课程名称</span>
+                <span class="ctype">课程类型</span>
+                <span class="tname">教师</span>
+                <span class="grade">分数</span>
+                <span class="credit">学分</span>
+                <span class="gradepoint">绩点</span>
+                <span class="time">时间</span>
+                <span class="isgreat">是否有效</span>
+            </li>
+            {% for achi in achi_li %}
+            <li cid="{{achi.id}}">
+                <span class="cname">{{achi.course.cname}}</span>
+                <span class="ctype">{{achi.course.ctype}}</span>
+                <span class="tname">{{achi.course.teacher.tname}}</span>
+                <span class="grade">{{achi.grade}}</span>
+                <span class="credit">{{achi.credit}}</span>
+                <span class="gradepoint">{{achi.gradepoint}}</span>
+                <span class="time">{{achi.course.cretime}}</span>
+                <span class="isgreat">{{achi.isgreat}}</span>
+            </li>
+            {% endfor %}
+        </ul>
+        <div>
+            <span>已选修学分：{{crd_sum}}</span>
+            &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+            <span>平均绩点：{{gpa}}</span>
+        </div>
+    </div>
+    {% import "footer.html" as f_add%}
+    {{ f_add.footer() }}
+</body>
+</html>

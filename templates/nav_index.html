@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <title>登录导航页面</title>
+    <link rel="stylesheet" href="/static/css/header.css">
+    <link rel="stylesheet" href="/static/css/footer.css">
+    <link rel="stylesheet" href="/static/css/nav_index.css">
+</head>
+
+<body>
+    {% import "header.html" as h_add%}
+    {{ h_add.header() }}
+    <div id="main">
+        <div id="nav">
+            <span>登录导航</span>
+            <p><a href="{{url_for('app_stu.stu_login')}}">学生登录</a></p>
+            <p><a href="{{url_for('app_tea.tea_login')}}">教师登录</a></p>
+            <p><a href="{{url_for('app_admin.admin_login')}}">后台登录</a></p>
+        </div>
+    </div>
+    {% import "footer.html" as f_add%}
+    {{ f_add.footer() }}
+</body>
+
+</html>

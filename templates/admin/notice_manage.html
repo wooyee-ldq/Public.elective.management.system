@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <title>公告管理页面</title>
+    <link rel="stylesheet" href="/static/css/header.css">
+    <link rel="stylesheet" href="/static/css/footer.css">
+    <link rel="stylesheet" href="/static/css/notice_manage.css">
+    <script type="text/javascript" src="/static/js/jquery-3.4.1/jquery-3.4.1.min.js"></script>
+    <link rel='stylesheet' href='/static/css/bootstrap/css/bootstrap.min.css' />
+    <script type="text/javascript" src="/static/css/bootstrap/js/bootstrap.min.js"></script>
+    <meta name="viewport" ,content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+</head>
+
+<body>
+    {% import "header.html" as h_add%}
+    {{ h_add.header() }}
+    <div id="main">
+        <p>公告管理</p>
+        <ul id="notice">
+            <li id="tip">
+                <span class="texts">公告内容</span>
+                <span class="cretime">创建时间</span>
+                <span class="isover">是否过期</span>
+            </li>
+            {% for notice in notice_li %}
+            <li cid="{{notice.id}}" tid="{{notice.tid}}">
+                <span class="texts">{{notice.text}}</span>
+                <span class="cretime">{{notice.cretime}}</span>
+                <span cid="{{notice.id}}" class="isover">{{notice.isover}}</span>
+                {% if notice.isover == "否" %}
+                <input cid="{{notice.id}}" class="selbox" type="checkbox" name="cid" value="{{notice.id}}">
+                {% endif %}
+            </li>
+            {% endfor %}
+        </ul>
+        <div id="func">
+            <button id="reverse_all" class="btn">反选/</button>
+            <button id="check_all" class="btn">全选</button>
+            <button id="over" class="btn btn-danger">过期设置</button>
+        </div>
+    </div>
+    {% import "footer.html" as f_add%}
+    {{ f_add.footer() }}
+    <script type="text/javascript" src="/static/js/notice_manage.js"></script>
+</body>
+
+</html>

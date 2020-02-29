@@ -1,0 +1,22 @@
+2020-02-27 19:18:20 : 'Coseltime' object is not iterable
+2020-02-27 19:19:53 : 'Coseltime' object is not iterable
+2020-02-27 19:39:58 : 'Coseltime' object is not iterable
+2020-02-27 19:39:58 : 'NoneType' object has no attribute 'isend'
+2020-02-27 19:40:08 : 'Coseltime' object is not iterable
+2020-02-27 19:40:08 : 'NoneType' object has no attribute 'isend'
+2020-02-27 19:40:37 : 'Coseltime' object is not iterable
+2020-02-27 19:40:37 : 'NoneType' object has no attribute 'isend'
+2020-02-27 19:45:55 : type object 'Courses' has no attribute 'list_to_dict'
+2020-02-27 19:47:37 : [Errno 2] No such file or directory: 'Log_file/exception_log/other_error/2020-02-27-other_error.log'
+2020-02-27 19:47:44 : [Errno 2] No such file or directory: 'Log_file/exception_log/other_error/2020-02-27-other_error.log'
+2020-02-27 19:51:47 : [Errno 2] No such file or directory: 'Log_file/exception_log/other_error/2020-02-27-other_error.log'
+2020-02-27 19:55:12 : [Errno 2] No such file or directory: 'Log_file/exception_log/other_error/2020-02-27-other_error.log'
+2020-02-27 20:06:41 : list_to_dict() missing 1 required positional argument: 'self'
+2020-02-27 23:13:25 : (pymysql.err.IntegrityError) (1048, "Column 'cnum' cannot be null")
+[SQL: INSERT INTO courses (cname, ctype, classweek, classtime, cnum, cretime, updtime, credit, ispass, isexamine, isend, rid, tid, caid) VALUES (%(cname)s, %(ctype)s, %(classweek)s, %(classtime)s, %(cnum)s, %(cretime)s, %(updtime)s, %(credit)s, %(ispass)s, %(isexamine)s, %(isend)s, %(rid)s, %(tid)s, %(caid)s)]
+[parameters: {'cname': '中国文化', 'ctype': '非限定性艺术类', 'classweek': '星期一', 'classtime': '23:13', 'cnum': None, 'cretime': '2020-02-27 23:13:25', 'updtime': '2020-02-27 23:13:25', 'credit': '2', 'ispass': 0, 'isexamine': 0, 'isend': 0, 'rid': '6', 'tid': 1, 'caid': None}]
+(Background on this error at: http://sqlalche.me/e/gkpj)
+2020-02-27 23:15:14 : (pymysql.err.IntegrityError) (1048, "Column 'cnum' cannot be null")
+[SQL: INSERT INTO courses (cname, ctype, classweek, classtime, cnum, cretime, updtime, credit, ispass, isexamine, isend, rid, tid, caid) VALUES (%(cname)s, %(ctype)s, %(classweek)s, %(classtime)s, %(cnum)s, %(cretime)s, %(updtime)s, %(credit)s, %(ispass)s, %(isexamine)s, %(isend)s, %(rid)s, %(tid)s, %(caid)s)]
+[parameters: {'cname': '中国文化', 'ctype': '非限定性艺术类', 'classweek': '星期一', 'classtime': '23:14', 'cnum': None, 'cretime': '2020-02-27 23:15:14', 'updtime': '2020-02-27 23:15:14', 'credit': '2', 'ispass': 0, 'isexamine': 0, 'isend': 0, 'rid': '1', 'tid': 1, 'caid': 2}]
+(Background on this error at: http://sqlalche.me/e/gkpj)

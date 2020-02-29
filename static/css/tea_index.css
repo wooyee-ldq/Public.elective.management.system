@@ -1,0 +1,95 @@
+#user span{
+    font-size: 16px;
+}
+
+#index{
+    padding: 0px 40px;
+}
+
+#index span{
+    display: block;
+    width: 400px;
+    font-size: 20px;
+    color: #0088cc;
+    text-align: center;
+}
+
+#index div{
+    width: 400px;
+    text-align: center;
+}
+
+#index button{
+    padding: 5px 20px;
+    margin: 0px 20px;
+}
+
+/* 公告栏样式 */
+#notice{
+    width: 400px;
+    height: 200px;
+    background-color: cadetblue;
+    font-size: 18px;
+    color: #fff;
+}
+
+#notice div{
+    width: 300px;
+    margin: 50px auto;
+}
+
+#next_left{
+    top: 50%;
+    background-color: cadetblue;
+    border: 0px;
+}
+
+#next_right{
+    top: 50%;
+    background-color: cadetblue;
+    border: 0px;
+}
+/* 公告栏样式 */
+
+
+#chpwd{
+    padding: 0px 40px;
+}
+
+#chpwd span{
+    display: block;
+    width: 200px;
+    font-size: 15px;
+    color: #0088cc;
+    text-align: center;
+}
+
+#chpwd input{
+    margin: 10px 0px;
+    padding: 5px 0px;
+}
+
+#chpwd button{
+    margin: 10px 20px;
+}
+
+.mybtn{
+    width: 200px;
+    text-align: center;
+}
+
+#pic{
+    display: inline-block;
+    margin: 0px 20px;
+    font-size: 20px;
+    text-align: center;
+    height: 60px;
+    width: 60px;
+    line-height: 60px;
+    background-color: rgb(18, 135, 194);
+    border-radius: 50%;
+}
+
+
+
+

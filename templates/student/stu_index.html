@@ -1,0 +1,108 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <title>学生主页面</title>
+    <link rel="stylesheet" href="/static/css/header.css">
+    <link rel="stylesheet" href="/static/css/footer.css">
+    <link rel="stylesheet" href="/static/css/index.css">
+    <link rel="stylesheet" href="/static/css/stu_index.css">
+    <script type="text/javascript" src="/static/js/jquery-3.4.1/jquery-3.4.1.min.js"></script>
+    <link rel='stylesheet' href='/static/css/bootstrap/css/bootstrap.min.css' />
+    <script type="text/javascript" src="/static/css/bootstrap/js/bootstrap.min.js"></script>
+    <meta name="viewport" ,content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+</head>
+
+<body>
+    {% import "header.html" as h_add%}
+    {{ h_add.header() }}
+    <div id="exit">
+        <span>确认退出？</span>
+        <button id="cancel_exit" class="btn btn-danger">取消</button>
+        <a href="{{url_for('app_stu.stu_exit')}}"><button id="sure_exit" class="btn btn-primary">确认</button></a>
+    </div>
+    <div id="user">
+        <div id="pic">{{pic}}</div>
+        <span>学生：{{sname}}</span>
+        <button id="quit" class="btn btn-warning">退出</button>
+    </div>
+    <div id="main">
+        <div id="nav">
+            <ul class="nav nav-pills nav-stacked">
+                <li tip="index" class="active"><a href="#">主页</a></li>
+                <li tip="person"><a href="#">个人信息</a></li>
+                <li tip="selcourse"><a href="#">选课管理</a></li>
+                <li tip="msg"><a href="#">信息查看</a></li>
+                <li tip="chpwd"><a href="#">修改密码</a></li>
+            </ul>
+        </div>
+        <div id="show">
+            <div class="show" id="index">
+                <span>公告栏</span><br>
+                <div id="myCarousel" class="carousel slide">
+                    <!-- 轮播（Carousel）项目 -->
+                    <div id="notice" class="carousel-inner">
+                        {% for notice in notice_li %}
+                        {% if notice == notice_li[0] %}
+                        <div class="item active">{{notice.text}}</div>
+                        {% else %}
+                        <div class="item">{{notice.text}}</div>
+                        {% endif %}
+                        {% endfor %}
+                    </div>
+                    <!-- 轮播（Carousel）导航 -->
+                    <a id="next_left" class="left carousel-control" href="#myCarousel" role="button" data-slide="prev">
+                        &lt;
+                    </a>
+                    <a id="next_right" class="right carousel-control" href="#myCarousel" role="button"
+                        data-slide="next">
+                        &gt;
+                    </a>
+                </div>
+            </div>
+            <div class="show" id="person">
+                <p>学号：{{sno}}</p>
+                <p>姓名：{{sname}}&nbsp;&nbsp;&nbsp;{{ssex}}</p>
+                <p>班级：{{classname}}</p>
+                <p>学院：{{collegename}}</p>
+                <p>校区：{{campus}}</p>
+                <p>电话：{{tel}}</p>
+                <p>身份证：{{pid}}</p>
+                <p>生源地：{{nativeplace}}</p>
+            </div>
+            <div class="show" id="selcourse">
+                <ul>
+                    <li><a href="{{url_for('app_stu.course_preview')}}" target="_blank">课程预览</a></li>
+                    <li><a href="{{url_for('app_stu.preview_page')}}" target="_blank">课程预选</a></li>
+                    <li><a href="{{url_for('app_stu.sel_course_page')}}" target="_blank">选课操作</a></li>
+                </ul>
+            </div>
+            <div class="show" id="msg">
+                <li><a href="{{url_for('app_stu.course_record')}}" target="_blank">选课记录</a></li>
+                <li><a href="{{url_for('app_stu.grade_get')}}" target="_blank">成绩查看</a></li>
+            </div>
+            <div class="show" id="chpwd">
+                <div>
+                    <span>输入原密码:</span>
+                    <input id="old_pwd" type="password" name="old_pwd">
+                    <span>输入新密码:</span>
+                    <input id="new_pwd1" type="password" name="new_pwd1">
+                    <span>确认新密码:</span>
+                    <input id="new_pwd2" type="password" name="new_pwd2">
+                </div>
+                <div class="mybtn">
+                    <button id="cancel_chpwd" class="btn btn-danger">取消</button>
+                    <button id="sure_chpwd" class="btn btn-primary">确认</button>
+                </div>
+            </div>
+        </div>
+    </div>
+    {% import "footer.html" as f_add%}
+    {{ f_add.footer() }}
+    <script type="text/javascript" src="/static/js/index.js"></script>
+    <script type="text/javascript" src="/static/js/stu_index.js"></script>
+</body>
+
+</html>

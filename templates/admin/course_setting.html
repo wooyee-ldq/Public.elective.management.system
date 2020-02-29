@@ -1,0 +1,98 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <title>开课时间设置页面</title>
+    <link rel="stylesheet" href="/static/css/header.css">
+    <link rel="stylesheet" href="/static/css/footer.css">
+    <link rel="stylesheet" href="/static/css/course_setting.css">
+    <script type="text/javascript" src="/static/js/jquery-3.4.1/jquery-3.4.1.min.js"></script>
+    <link rel='stylesheet' href='/static/css/bootstrap/css/bootstrap.min.css' />
+    <script type="text/javascript" src="/static/css/bootstrap/js/bootstrap.min.js"></script>
+
+    <link href="/static/jc/datetimepicker.css" rel="stylesheet">
+    <script src="/static/jc/bootstrap3.3.min.js"></script>
+    <script src="/static/jc/bootstrap-datetimepicker.min.js"></script>
+
+    <meta name="viewport" ,content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+</head>
+
+<body>
+    {% import "header.html" as h_add%}
+    {{ h_add.header() }}
+    <div id="main">
+        <p>开课时间设置</p>
+        <ul id="seltime">
+            <li id="tip">
+                <span class="starttime">开始时间</span>
+                <span class="endtime">结束时间</span>
+                <span class="remark">备注</span>
+                <span class="cretime">创建时间</span>
+                <span class="campus">校区</span>
+                <span class="level">年级</span>
+                <span class="isend">是否结束</span>
+            </li>
+            {% for seltime in seltime_li %}
+            <li cid="{{seltime.id}}">
+                <span class="starttime">{{seltime.starttime}}</span>
+                <span class="endtime">{{seltime.endtime}}</span>
+                <span class="remark">{{seltime.remark}}</span>
+                <span class="cretime">{{seltime.cretime}}</span>
+                <span class="campus">{{seltime.campus.caname}}</span>
+                <span class="level">{{seltime.level.lname}}</span>
+                <span cid="{{seltime.id}}" class="isend">{{seltime.isend}}</span>
+                {% if seltime.isend == "否" %}
+                <input cid="{{seltime.id}}" class="selbox" type="checkbox" name="cid" value="{{seltime.id}}">
+                {% endif %}
+            </li>
+            {% endfor %}
+        </ul>
+        <div id="func">
+            <div id="time">
+                <p>开始时间：</p>
+                <div id="start" class="input-append date form_datetime">
+                    <input size="20" type="text" value="" readonly>
+                    <span class="add-on"><i class="icon-remove"></i></span>
+                    <span class="add-on"><i class="icon-calendar"></i></span>
+                </div>
+                <p>结束时间：</p>
+                <div id="end" class="input-append date form_datetime">
+                    <input size="20" type="text" value="" readonly>
+                    <span class="add-on"><i class="icon-remove"></i></span>
+                    <span class="add-on"><i class="icon-calendar"></i></span>
+                </div>
+            </div>
+            <div>
+                <p>校区：</p>
+                <select id="caid">
+                    {% for campus in campus_li %}
+                    <option value="{{campus.id}}">{{campus.caname}}</option>
+                    {% endfor %}
+                </select>
+                <p>年级：</p>
+                <select id="lid">
+                    {% for level in level_li %}
+                    <option value="{{level.id}}">{{level.lname}}</option>
+                    {% endfor %}
+                </select>
+                <p>备注：</p>
+                <div id="remark">
+                    <textarea id="mark" value=""></textarea>
+                </div>
+            </div>
+            <div>
+                <button id="reverse_all" class="btn">反选/</button>
+                <button id="check_all" class="btn">全选</button>
+                <button id="over" class="btn btn-danger">结束</button>
+                <button id="set" class="btn btn-primary">设置</button>
+            </div>
+        </div>
+    </div>
+    {% import "footer.html" as f_add%}
+    {{ f_add.footer() }}
+    <script src="/static/js/course_setting.js"></script>
+</body>
+
+</html>

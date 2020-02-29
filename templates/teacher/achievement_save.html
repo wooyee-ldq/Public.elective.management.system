@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <title>成绩录入页面</title>
+    <link rel="stylesheet" href="/static/css/header.css">
+    <link rel="stylesheet" href="/static/css/footer.css">
+    <link rel="stylesheet" href="/static/css/achievement_save.css">
+    <script type="text/javascript" src="/static/js/jquery-3.4.1/jquery-3.4.1.min.js"></script>
+    <link rel='stylesheet' href='/static/css/bootstrap/css/bootstrap.min.css' />
+    <script type="text/javascript" src="/static/css/bootstrap/js/bootstrap.min.js"></script>
+    <meta name="viewport" ,content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+<body>
+    {% import "header.html" as h_add%}
+    {{ h_add.header() }}
+    <div id="main">
+        <p>成绩录入</p>
+        <ul id="stu">
+            {% for course in course_li %}
+                <div id="cname">课程：{{course.cname}}</div>
+                <li class="tip">
+                    <span class="collegename">学院</span>
+                    <span class="classname">班级</span>
+                    <span class="sno">学号</span>
+                    <span class="sname">姓名</span>
+                    <span class="isgreat">是否有效</span>
+                    <span class="grade">分数</span>
+                </li>
+                {% for achi in course["achi_li"] %}
+                <li acid="{{achi.id}}" class="grade_li">
+                    <span class="collegename">{{achi.student.college.collname}}</span>
+                    <span class="classname">{{achi.student.classes.clname}}</span>
+                    <span class="sno">{{achi.student.sno}}</span>
+                    <span class="sname">{{achi.student.sname}}</span>
+                    <span class="isgreat">
+                        <select>
+                            <option value="1" selected>有效</option>
+                            <option value="0">无效</option>
+                        </select>
+                    </span>
+                    <span class="grade">
+                        <input acid = "{{achi.id}}" type="text" value="">
+                    </span>
+                </li>
+                {% endfor %}
+                <br>
+            {% endfor %}
+        </ul>
+        <div id="func">
+            <button id="clear" class="btn btn-danger">清空</button>
+            <button id="save" class="btn btn-success">保存</button>
+        </div>
+    </div>
+    {% import "footer.html" as f_add%}
+    {{ f_add.footer() }}
+    <script type="text/javascript" src="/static/js/achievement_save.js"></script>
+</body>
+</html>

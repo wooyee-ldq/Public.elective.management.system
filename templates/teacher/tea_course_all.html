@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>开课记录页面</title>
+    <link rel="stylesheet" href="/static/css/header.css">
+    <link rel="stylesheet" href="/static/css/footer.css">
+    <link rel="stylesheet" href="/static/css/tea_course.css">
+</head>
+
+<body>
+    {% import "header.html" as h_add%}
+    {{ h_add.header() }}
+    <div id="main">
+        <p>开课记录</p>
+        <ul id="course">
+            <li id="tip">
+                <span class="cname">课程名称</span>
+                <span class="ctype">课程类型</span>
+                <span class="ctime">上课时间</span>
+                <span class="cplace">上课地点</span>
+                <span class="credit">课程学分</span>
+                <span class="campus">开课校区</span>
+                <span class="ispass">是否通过</span>
+                <span class="isexamine">是否审核</span>
+                <span class="isend">是否结课</span>
+            </li>
+            {% for course in course_li %}
+            <li cid="{{course.id}}" tid="{{course.tid}}">
+                <span class="cname">{{course.cname}}</span>
+                <span class="ctype">{{course.ctype}}</span>
+                <span class="ctime">{{course.classweek}}&nbsp;{{course.classtime}}</span>
+                <span class="cplace">{{course.classplace}}</span>
+                <span class="credit">{{course.credit}}</span>
+                <span class="campus">{{course.campus}}</span>
+                <span class="ispass">{{course.ispass}}</span>
+                <span class="isexamine">{{course.isexamine}}</span>
+                <span class="isend">{{course.isend}}</span>
+            </li>
+            {% endfor %}
+        </ul>
+    </div>
+    {% import "footer.html" as f_add%}
+    {{ f_add.footer() }}
+</body>
+
+</html>

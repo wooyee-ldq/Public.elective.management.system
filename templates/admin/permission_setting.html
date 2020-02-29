@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>权限设置页面</title>
+    <link rel="stylesheet" href="/static/css/header.css">
+    <link rel="stylesheet" href="/static/css/footer.css">
+    <link rel="stylesheet" href="/static/css/permission_setting.css">
+    <script type="text/javascript" src="/static/js/jquery-3.4.1/jquery-3.4.1.min.js"></script>
+    <link rel='stylesheet' href='/static/css/bootstrap/css/bootstrap.min.css' />
+    <script type="text/javascript" src="/static/css/bootstrap/js/bootstrap.min.js"></script>
+    <meta name="viewport" ,content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+</head>
+<body>
+    {% import "header.html" as h_add%}
+    {{ h_add.header() }}
+    <div id="main">
+        <p>审批权限设置</p>
+        <ul id="permission">
+            <li id="tip">
+                <span class="ano">账号</span>
+                <span class="pwd">原始密码</span>
+                <span class="examine">审批权限</span>
+            </li>
+            {% for admin in admin_li %}
+            <li cid="{{admin.id}}">
+                <span class="ano">{{admin.ano}}</span>
+                <span class="pwd">{{admin.pwd}}</span>
+                {% if admin.examine == 0 %}
+                <span cid="{{admin.id}}" class="examine">无权限</span>
+                {% endif %}
+                {% if admin.examine == 1 %}
+                <span cid="{{admin.id}}" class="examine">有权限</span>
+                {% endif %}
+                <input cid="{{admin.id}}" class="selbox" type="checkbox" name="cid" value="{{admin.id}}">
+            </li>
+            {% endfor %}
+        </ul>
+        <div id="func">
+            <button id="reverse_all" class="btn">反选/</button>
+            <button id="check_all" class="btn">全选</button>
+            <button id="refuse" class="btn btn-danger">撤销权限</button>
+            <button id="agree" class="btn btn-primary">授权</button>
+        </div>
+    </div>
+    {% import "footer.html" as f_add%}
+    {{ f_add.footer() }}
+    <script type="text/javascript" src="/static/js/permission_setting.js"></script>
+</body>
+</html>

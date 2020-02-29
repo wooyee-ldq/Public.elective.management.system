@@ -1,0 +1,10 @@
+2020-02-15 16:20:56 : float() argument must be a string or a number, not 'datetime.datetime'
+2020-02-15 16:21:02 : float() argument must be a string or a number, not 'datetime.datetime'
+2020-02-15 16:29:01 : (pymysql.err.IntegrityError) (1048, "Column 'remark' cannot be null")
+[SQL: INSERT INTO coseltime (cretime, updtime, starttime, endtime, remark, isend) VALUES (%(cretime)s, %(updtime)s, %(starttime)s, %(endtime)s, %(remark)s, %(isend)s)]
+[parameters: {'cretime': '2020-02-15 16:29:01', 'updtime': '2020-02-15 16:29:01', 'starttime': '2020-04-15 12:00', 'endtime': '2020-04-15 13:00', 'remark': None, 'isend': 0}]
+(Background on this error at: http://sqlalche.me/e/gkpj)
+2020-02-15 16:32:32 : (pymysql.err.IntegrityError) (1048, "Column 'remark' cannot be null")
+[SQL: INSERT INTO coseltime (cretime, updtime, starttime, endtime, remark, isend) VALUES (%(cretime)s, %(updtime)s, %(starttime)s, %(endtime)s, %(remark)s, %(isend)s)]
+[parameters: {'cretime': '2020-02-15 16:32:32', 'updtime': '2020-02-15 16:32:32', 'starttime': '2020-02-15 16:32', 'endtime': '2020-02-16 16:20', 'remark': None, 'isend': 0}]
+(Background on this error at: http://sqlalche.me/e/gkpj)

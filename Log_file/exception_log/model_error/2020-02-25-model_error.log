@@ -1,0 +1,16 @@
+2020-02-25 10:57:07 : (pymysql.err.InternalError) (1366, "Incorrect integer value: '开课时段设置测试！' for column 'caid' at row 1")
+[SQL: INSERT INTO coseltime (cretime, updtime, starttime, endtime, remark, isend, lid, caid) VALUES (%(cretime)s, %(updtime)s, %(starttime)s, %(endtime)s, %(remark)s, %(isend)s, %(lid)s, %(caid)s)]
+[parameters: {'cretime': '2020-02-25 10:57:07', 'updtime': '2020-02-25 10:57:07', 'starttime': '2020-02-25 10:53:00', 'endtime': '2020-02-26 11:00:00', 'remark': '1', 'isend': 0, 'lid': '2', 'caid': '开课时段设置测试！'}]
+(Background on this error at: http://sqlalche.me/e/2j85)
+2020-02-25 10:57:18 : (pymysql.err.InternalError) (1366, "Incorrect integer value: '开课时段设置测试！' for column 'caid' at row 1")
+[SQL: INSERT INTO coseltime (cretime, updtime, starttime, endtime, remark, isend, lid, caid) VALUES (%(cretime)s, %(updtime)s, %(starttime)s, %(endtime)s, %(remark)s, %(isend)s, %(lid)s, %(caid)s)]
+[parameters: {'cretime': '2020-02-25 10:57:18', 'updtime': '2020-02-25 10:57:18', 'starttime': '2020-02-25 10:53:00', 'endtime': '2020-02-26 11:00:00', 'remark': '1', 'isend': 0, 'lid': '2', 'caid': '开课时段设置测试！'}]
+(Background on this error at: http://sqlalche.me/e/2j85)
+2020-02-25 10:57:27 : (pymysql.err.InternalError) (1366, "Incorrect integer value: '开课时段设置测试！' for column 'caid' at row 1")
+[SQL: INSERT INTO coseltime (cretime, updtime, starttime, endtime, remark, isend, lid, caid) VALUES (%(cretime)s, %(updtime)s, %(starttime)s, %(endtime)s, %(remark)s, %(isend)s, %(lid)s, %(caid)s)]
+[parameters: {'cretime': '2020-02-25 10:57:27', 'updtime': '2020-02-25 10:57:27', 'starttime': '2020-02-25 10:53:00', 'endtime': '2020-02-26 11:00:00', 'remark': '1', 'isend': 0, 'lid': '2', 'caid': '开课时段设置测试！'}]
+(Background on this error at: http://sqlalche.me/e/2j85)
+2020-02-25 10:57:35 : (pymysql.err.InternalError) (1366, "Incorrect integer value: '开课时段设置测试！' for column 'caid' at row 1")
+[SQL: INSERT INTO coseltime (cretime, updtime, starttime, endtime, remark, isend, lid, caid) VALUES (%(cretime)s, %(updtime)s, %(starttime)s, %(endtime)s, %(remark)s, %(isend)s, %(lid)s, %(caid)s)]
+[parameters: {'cretime': '2020-02-25 10:57:35', 'updtime': '2020-02-25 10:57:35', 'starttime': '2020-02-25 10:53:00', 'endtime': '2020-02-26 11:00:00', 'remark': '1', 'isend': 0, 'lid': '2', 'caid': '开课时段设置测试！'}]
+(Background on this error at: http://sqlalche.me/e/2j85)

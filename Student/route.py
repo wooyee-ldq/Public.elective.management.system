@@ -1,0 +1,167 @@
+# coding:utf-8
+
+
+from flask import render_template, request, jsonify, session, redirect, url_for
+
+from Service.changePwd import ChangePwd
+from Service.loginCheck import LoginCheck
+from Service.noticeManage import NoticeManage
+from Service.redis_service import RedisService
+from Service.selcourseManage import SelcourseManage
+from Service.achievementManage import AchievementManage
+from Service.stu_service import StuService
+from WTF_Form.login_form import LoginForm
+from . import app_stu
+from Log.loginLog import LoginLog
+
+
+@app_stu.before_request
+def before_request():
+    url = request.path
+    if len(url.split("/")) > 3:
+        stu = session.get("stu")
+        if stu is None:
+            return render_template("page404.html"), 404
+
+
+@app_stu.route("/")
+def stu_login():
+    """返回学生登录页面"""
+    form = LoginForm()
+    return render_template("student/stu_login.html", form=form)
+
+
+@app_stu.route("/index", methods=["POST"])
+def stu_index():
+    """登录成功返回学生主页"""
+    data = request.form
+    user = data.get("username")
+    password = data.get("password")
+    ip = request.remote_addr
+
+    if user is None or password is None:
+        return render_template("page404.html"), 404  # 防止使用postman等工具进行访问
+
+    stu = LoginCheck.stu_pwd_check(user, password)
+
+    if stu is None:
+        # 保存日志
+        LoginLog.login_error(LoginLog.stu_log_error(user, ip))
+        return render_template("student/stu_login.html",
+                               form=LoginForm(),
+                               error="账号或密码错误！")  # 系统提示
+    else:
+        # 保存日志
+        LoginLog.login_success(LoginLog.stu_log_success(user, ip))
+
+        data = LoginCheck.stu_to_dict(stu)
+        # 保存用户session
+        session["stu"] = stu
+        pic = stu.sname[-2:]
+        notice_li = NoticeManage.get_by_isover(0)
+        return render_template("student/stu_index.html", **data,
+                               pic=pic, notice_li=notice_li)
+
+
+@app_stu.route("/changePwd")
+def change_pwd():
+    """修改密码操作"""
+    stu = session.get("stu")
+    if stu is None:
+        return jsonify({
+            "tip": "账号已下线，请重新登录！"
+        })
+
+    # 获取修改密码数据
+    data = request.form
+    old_pwd = data.get("old_pwd")  # 获取原密码
+    new_pwd1 = data.get("new_pwd1")  # 获取新密码
+    new_pwd2 = data.get("new_pwd2")  # 获取新确认密码
+
+    bl = ChangePwd.stu_change_pwd(stu.id, old_pwd, new_pwd1, new_pwd2)
+    if bl is True:
+        return jsonify({"tip": "修改成功！"})
+    else:
+        return jsonify({"tip": "修改失败！"})
+
+
+@app_stu.route("/stuExit")
+def stu_exit():
+    """退出登录操作"""
+    session.pop("stu", None)
+    return redirect(url_for("app_stu.stu_login"))
+
+
+@app_stu.route("/courseSelGet")
+def course_sel_get():
+    """学生选课信息查询"""
+    sid = request.form.get("sid")
+
+    cosel_li = SelcourseManage.get_by_sid(sid)
+    return jsonify(cosel_li)
+
+
+@app_stu.route("/gradeGet")
+def grade_get():
+    """成绩查看页面"""
+    stu = session.get("stu")
+    if stu is None:
+        return render_template("page404.html"), 404
+
+    achi_li = AchievementManage.get_by_sid(stu.id)
+    crd_sum, gpa = StuService.count_gpaandcredits(achi_li)
+    return render_template("student/grade_get.html",
+                           achi_li=achi_li,
+                           crd_sum=crd_sum,
+                           gpa=gpa)
+
+
+@app_stu.route("/coursePreview")
+def course_preview():
+    """课程预览页面"""
+    stu = session.get("stu")
+    if stu is None:
+        return render_template("page404.html"), 404
+
+    campus_li = StuService.get_preview_course()
+
+    return render_template("student/course_preview.html", campus_li=campus_li)
+
+
+@app_stu.route("/previewPage")
+def preview_page():
+    """课程预选页面"""
+    stu = session.get("stu")
+    if stu is None:
+        return render_template("page404.html"), 404
+
+    course_li = StuService.get_preview_bycaid(stu.caid)
+
+    return render_template("student/preview_page.html", course_li=course_li)
+
+
+@app_stu.route("/courseRecord")
+def course_record():
+    """学生选课记录页面"""
+    stu = session.get("stu")
+    if stu is None:
+        return render_template("page404.html"), 404
+
+    selcourse_li = SelcourseManage.get_by_sid(stu.id)
+    return render_template("student/course_record.html", selcourse_li=selcourse_li)
+
+
+@app_stu.route("/selCoursePage")
+def sel_course_page():
+    """选课操作页面"""
+    stu = session.get("stu")
+    if stu is None:
+        return render_template("page404.html"), 404
+
+    # if RedisService.judge_can_sel(stu) is False:
+    #     return "不在选课时段"
+
+    course_li = StuService.get_preview_bycaid(stu.caid)
+
+    return render_template("student/sel_course_page.html", course_li=course_li)
+

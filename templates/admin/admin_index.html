@@ -1,0 +1,111 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <title>后台管理主页</title>
+    <link rel="stylesheet" href="/static/css/header.css">
+    <link rel="stylesheet" href="/static/css/footer.css">
+    <link rel="stylesheet" href="/static/css/admin_index.css">
+    <link rel="stylesheet" href="/static/css/index.css">
+    <script type="text/javascript" src="/static/js/jquery-3.4.1/jquery-3.4.1.min.js"></script>
+    <link rel='stylesheet' href='/static/css/bootstrap/css/bootstrap.min.css' />
+    <script type="text/javascript" src="/static/css/bootstrap/js/bootstrap.min.js"></script>
+    <meta name="viewport" ,content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+</head>
+
+<body>
+    {% import "header.html" as h_add%}
+    {{ h_add.header() }}
+    <div id="exit">
+        <span>确认退出？</span>
+        <button id="cancel_exit" class="btn btn-danger">取消</button>
+        <a href="{{url_for('app_admin.admin_exit')}}"><button id="sure_exit" class="btn btn-primary">确认</button></a>
+    </div>
+    <div id="user">
+        <span>管理员：</span>
+        {{ano}}
+        <button id="quit" class="btn btn-warning">退出</button>
+    </div>
+    <div id="main">
+        <div id="nav">
+            <ul class="nav nav-pills nav-stacked">
+                <li tip="index" class="active"><a href="#">主页</a></li>
+                <li tip="selco"><a href="#">选课管理</a></li>
+                <li tip="userman"><a href="#">用户管理</a></li>
+                <li tip="examineman"><a href="#">权限管理</a></li>
+                <li tip="chpwd"><a href="#">修改密码</a></li>
+                <li tip="creadmin"><a href="#">创建管理员</a></li>
+                <li tip="tblman"><a href="#">数据表管理</a></li>
+            </ul>
+        </div>
+        <div id="show">
+            <div class="show" id="index">
+                <span>公告发布</span><br>
+                <textarea name="notice" id="notice"></textarea>
+                <div>
+                    <a href="{{url_for('app_admin.notice_manage')}}" target="_blank"><button class="btn">管理</button></a>
+                    <button id="cancel_issue" class="btn btn-danger">取消</button>
+                    <button id="issue" class="btn btn-primary">发布</button>
+                </div>
+            </div>
+            <div class="show" id="selco">
+                <ul>
+                    <li><a href="{{url_for('app_admin.course_apply')}}" target="_blank">课程审批</a></li>
+                    <li><a href="{{url_for('app_admin.course_setting')}}" target="_blank">选课设置</a></li>
+                </ul>
+            </div>
+            <div class="show" id="userman">
+                <li><a href="/adminConsole/students/" target="_blank">学生管理</a></li>
+                <li><a href="/adminConsole/teachers/" target="_blank">教师管理</a></li>
+            </div>
+            <div class="show" id="examineman">
+                <ul>
+                    <li><a href="{{url_for('app_admin.permission_setting')}}" target="_blank">审批权限设置</a></li>
+                </ul>
+            </div>
+            <div class="show" id="chpwd">
+                <div>
+                    <span>输入原密码:</span>
+                    <input id="old_pwd" type="password" name="old_pwd">
+                    <span>输入新密码:</span>
+                    <input id="new_pwd1" type="password" name="new_pwd1">
+                    <span>确认新密码:</span>
+                    <input id="new_pwd2" type="password" name="new_pwd2">
+                </div>
+                <div class="mybtn">
+                    <button id="cancel_chpwd" class="btn btn-danger">取消</button>
+                    <button id="sure_chpwd" class="btn btn-primary">确认</button>
+                </div>
+            </div>
+            <div class="show" id="creadmin">
+                <ul>
+                    <li><a href="/adminConsole/admins" target="_blank">
+                        <button class="btn">普通管理员管理</button></a>
+                    </li> 
+                </ul>
+                 <div id="addadmin">
+                    <span>设置账号:</span>
+                    <input id="ano" type="text" name="username">
+                    <span>设置密码:</span>
+                    <input id="pwd" type="password" name="password">
+                    <button id="fast_add" class="btn btn-success">快速添加</button>
+                    <button id="cancel_add" class="btn btn-danger">取消</button>
+                    <button id="sure_add" class="btn btn-primary">添加</button>
+                </div>
+            </div>
+            <div class="show" id="tblman">
+                <ul>
+                    <li><a href="/adminConsole" target="_blank">数据表操作台</a></li>
+                </ul>
+            </div>
+        </div>
+    </div>
+    {% import "footer.html" as f_add%}
+    {{ f_add.footer() }}
+    <script type="text/javascript" src="/static/js/index.js"></script>
+    <script type="text/javascript" src="/static/js/admin_index.js"></script>
+</body>
+
+</html>
