@@ -3,8 +3,10 @@ import time
 
 from Log.exceptionLog import ExceptionLog
 from Model.myRedis import MyRedis
-from Model.model import db, Coseltime
+from Model.model import db, Coseltime, Courses, Selcourses
 import json
+
+from Tool.encryption import Encryption
 
 
 class RedisService(object):
@@ -45,6 +47,20 @@ class RedisService(object):
             except Exception as ex:
                 print(ex)
                 ExceptionLog.other_error(ex.__str__())
+            return False
+
+    @staticmethod
+    def judge_can_saveachi(caid):
+        """判断是否可以录入成绩"""
+        try:
+            r = MyRedis.get_redis()
+            seltime_num = r.hlen("seltime" + str(caid))
+            if seltime_num == 0:
+                return True
+            return False
+        except Exception as ex:
+            print(ex)
+            ExceptionLog.other_error(ex.__str__())
             return False
 
     @staticmethod
@@ -95,7 +111,7 @@ class RedisService(object):
         """加载审批通过的课程缓存"""
         r = MyRedis.get_redis()
         try:
-            r.rpush("selcourse"+str(course.get("caid")), json.dumps(course))
+            r.hset("selcourse"+str(course.get("caid")), str(course.get("id")), json.dumps(course))
 
         except Exception as e:
             print(e)
@@ -106,13 +122,69 @@ class RedisService(object):
     def get_selcourse(caid):
         """获取缓存中对应校区的课程信息"""
         r = MyRedis.get_redis()
-        course_li = r.lrange("selcourse"+str(caid), 0, -1)
-        if course_li is None:
-            return list()
+        course_li = r.hvals("selcourse"+str(caid))
         sel_li = list()
         for course in course_li:
             sel_li.append(json.loads(course))
         return sel_li
+
+    @staticmethod
+    def get_selnum(caid, cid):
+        """获取课程剩余人数"""
+        try:
+            r = MyRedis.get_redis()
+            course = r.hget("selcourse"+str(caid), str(cid))
+            if course is None:
+                return 0
+            course = json.loads(course)
+            return int(course.get("cnum"))
+        except Exception as e:
+            print(e)
+            ExceptionLog.other_error(e.__str__())
+            return 0
+
+    @staticmethod
+    def selnum_sub1(caid, cid):
+        """课程人数减少1操作"""
+        try:
+            r = MyRedis.get_redis()
+            course = r.hget("selcourse"+str(caid), str(cid))
+            if course is None:
+                return False
+            course = json.loads(course)
+            num = int(course.get("cnum"))
+            cnum = num - 1 if num > 0 else None
+            if cnum is None:
+                # r.hdel("selcourse"+str(caid), str(cid))
+                # 原来是要删除选完的课程，但是后面因为要退选，所以这里不再删除
+                return False
+            course["cnum"] = cnum
+            r.hset("selcourse"+str(caid), str(cid), json.dumps(course))
+            return True
+
+        except Exception as e:
+            print(e)
+            ExceptionLog.other_error(e.__str__())
+            return False
+
+    @staticmethod
+    def selnum_sum1(caid, cid):
+        """课程人数加1操作"""
+        try:
+            r = MyRedis.get_redis()
+            course = r.hget("selcourse" + str(caid), str(cid))
+            if course is None:
+                return False
+            course = json.loads(course)
+            cnum = int(course.get("cnum")) + 1
+            course["cnum"] = cnum
+            r.hset("selcourse" + str(caid), str(cid), json.dumps(course))
+            return True
+
+        except Exception as e:
+            print(e)
+            ExceptionLog.other_error(e.__str__())
+            raise e
 
     @staticmethod
     def del_sel_time(id_li):
@@ -156,17 +228,107 @@ class RedisService(object):
                 ExceptionLog.other_error(ex.__str__())
             return False
 
-    @classmethod
-    def preview_sel(cls, stu, cid_li):
+    @staticmethod
+    def preview_sel(sno, cids):
         """保存预选课程到redis缓存"""
-        r = MyRedis.get_redis()
-        name = "pre_sel" + str(stu.sno)
-        for cid in cid_li:
-            sel = {
-                "sid": stu.id,
-                "cid": int(cid)
-            }
-            r.rpush(name, sel)  # 存在删除数据问题
+        try:
+            r = MyRedis.get_redis()
+            name = "preview" + str(sno)
+            r.set(name, cids, ex=60 * 60 * 24 * 7)  # 预选的课程一个星期内有效
+
+        except Exception as ex:
+            print(ex)
+            ExceptionLog.other_error(ex.__str__())
+            raise ex
+
+    @staticmethod
+    def del_preview(sno):
+        """删除预选课程redis缓存"""
+        try:
+            r = MyRedis.get_redis()
+            name = "preview" + str(sno)
+            r.delete(name)
+
+        except Exception as ex:
+            print(ex)
+            ExceptionLog.other_error(ex.__str__())
+            raise ex
+
+    @staticmethod
+    def save_sel(sno, cids):
+        """保存选课信息redis缓存"""
+        try:
+            r = MyRedis.get_redis()
+            name = "sel" + str(sno)
+            r.set(name, str(cids), ex=60 * 60 * 4)  # 选课提交成功后4个小时内可以退选
+
+        except Exception as ex:
+            print(ex)
+            ExceptionLog.other_error(ex.__str__())
+            raise ex
+
+    @classmethod
+    def judge_and_remove(cls, sid, sno, cid, caid):
+        """判断是否可以退选课程，可以则调用退选课程操作函数"""
+        tip = "退课失败！"
+        try:
+            r = MyRedis.get_redis()
+            name = "sel" + str(sno)
+            cids = r.get(name)
+            tip = "超过退课时间，退课失败！"
+            if cids is None:
+                return False, tip
+            cids = str(cids)[1:-1]
+            cid_li = cids.split(",")
+            for cid1 in cid_li:
+                if str(cid) == cid1[1:-1]:
+                    bl = cls.remove_sel(sid, cid, caid)
+                    if bl:
+                        tip = "退课成功！"
+                        return True, tip
+                    else:
+                        tip = "退课失败！"
+                        break
+            return False, tip
+
+        except Exception as ex:
+            print(ex)
+            ExceptionLog.model_error(ex.__str__())
+            return False, tip
+
+    @classmethod
+    def remove_sel(cls, sid, cid, caid):
+        """退选课程操作"""
+        try:
+            sel = Selcourses.query.filter_by(sid=int(sid), cid=int(cid)).first()
+            db.session.delete(sel)
+            cls.selnum_sum1(caid, cid)
+            db.session.commit()
+            return True
+        except Exception as e:
+            print(e)
+            db.session.rollback()
+            return False
+
+    @staticmethod
+    def get_preview(sno):
+        """获取学生预选课程信息"""
+        try:
+            r = MyRedis.get_redis()
+            cids = r.get("preview"+str(sno))
+            pre_li = list()
+            if cids is None:
+                return pre_li
+            cid_li = str(cids).split(",")
+            for cid in cid_li:
+                course = Courses.query.get(int(cid))
+                pre_li.append(Courses.list_to_dict(course))
+            return pre_li
+
+        except Exception as e:
+            print(e)
+            ExceptionLog.model_error(e.__str__())
+            return list()
 
     # @staticmethod
     # def load_selcourse():
@@ -193,3 +355,7 @@ class RedisService(object):
     #         sel_li.append(json.loads(course))
     #     return sel_li
 
+
+if __name__ == '__main__':
+    r = MyRedis.get_redis()
+    # r.set("test", str(["1", "2"]))
