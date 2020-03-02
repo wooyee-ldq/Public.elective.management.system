@@ -63,7 +63,7 @@ def stu_index():
                                pic=pic, notice_li=notice_li)
 
 
-@app_stu.route("/changePwd")
+@app_stu.route("/changePwd", methods=["POST"])
 def change_pwd():
     """修改密码操作"""
     stu = session.get("stu")
@@ -134,10 +134,31 @@ def preview_page():
     stu = session.get("stu")
     if stu is None:
         return render_template("page404.html"), 404
+    if RedisService.judge_can_sel(stu):
+        return redirect(url_for("app_stu.sel_course_page"))
 
     course_li = StuService.get_preview_bycaid(stu.caid)
+    preview_li = StuService.get_predone(stu.sno)
 
-    return render_template("student/preview_page.html", course_li=course_li)
+    return render_template("student/preview_page.html",
+                           course_li=course_li,
+                           preview_li=preview_li)
+
+
+@app_stu.route("/preview", methods=["POST"])
+def preview():
+    """预选操作"""
+    stu = session.get("stu")
+    if stu is None:
+        return jsonify({
+            "tip": "账号已下线，请重新登录！"
+        })
+    cid_li = request.form.get("cid_li").split(",")
+    bl = StuService.save_preview(stu.sno, cid_li)
+    if bl:
+        return jsonify({"tip": "预选课程成功，预选的课程一个星期内有效！"})
+    else:
+        return jsonify({"tip": "预选课程失败！"})
 
 
 @app_stu.route("/courseRecord")
@@ -158,10 +179,62 @@ def sel_course_page():
     if stu is None:
         return render_template("page404.html"), 404
 
-    # if RedisService.judge_can_sel(stu) is False:
-    #     return "不在选课时段"
+    if RedisService.judge_can_sel(stu) is False:
+        return "不在选课时段"
 
     course_li = StuService.get_preview_bycaid(stu.caid)
+    preview_li = StuService.get_predone(stu.sno)
+    sel_li = SelcourseManage.get_by_sidnoend(stu.id)
 
-    return render_template("student/sel_course_page.html", course_li=course_li)
+    return render_template("student/sel_course.html",
+                           course_li=course_li,
+                           preview_li=preview_li,
+                           sel_li=sel_li)
+
+
+@app_stu.route("/selCourse", methods=["POST"])
+def sel_course():
+    """选课提交操作"""
+    stu = session.get("stu")
+    if stu is None:
+        return jsonify({
+            "tip": "账号已下线，请重新登录！"
+        })
+
+    sel_li = request.form.get("sel_li").split(",")
+
+    bl, cids = StuService.save_sel_course(stu.id, stu.sno, stu.caid, sel_li)
+    if bl:
+        return jsonify({
+            "tip": cids,
+            "bl": 200
+        })
+    else:
+        return jsonify({
+            "tip": cids,
+            "bl": 400
+        })
+
+
+@app_stu.route("/selRemove", methods=["POST"])
+def sel_remove():
+    """退选课操作"""
+    stu = session.get("stu")
+    if stu is None:
+        return jsonify({
+            "tip": "账号已下线，请重新登录！"
+        })
+
+    cid = request.form.get("cid")
+    bl, tip = StuService.remove_sel_course(stu.id, stu.sno, cid, stu.caid)
+    if bl:
+        return jsonify({
+            "bl": 200,
+            "tip": tip
+        })
+    else:
+        return jsonify({
+            "bl": 400,
+            "tip": tip
+        })
 
