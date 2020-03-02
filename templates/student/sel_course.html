@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <title>选课操作页面</title>
+    <link rel="stylesheet" href="/static/css/header.css">
+    <link rel="stylesheet" href="/static/css/footer.css">
+    <link rel="stylesheet" href="/static/css/preview_page.css">
+    <script type="text/javascript" src="/static/js/jquery-3.4.1/jquery-3.4.1.min.js"></script>
+    <link rel='stylesheet' href='/static/css/bootstrap/css/bootstrap.min.css' />
+    <script type="text/javascript" src="/static/css/bootstrap/js/bootstrap.min.js"></script>
+    <meta name="viewport" ,content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+</head>
+
+<body>
+    {% import "header.html" as h_add%}
+    {{ h_add.header() }}
+    <div id="main">
+        <p>选课操作</p>
+        <ul id="course">
+            <li id="tip">
+                <span class="cname">课程名称</span>
+                <span class="ctype">课程类型</span>
+                <span class="ctime">上课时间</span>
+                <span class="cplace">上课地点</span>
+                <span class="tname">课程教师</span>
+                <span class="credit">学分</span>
+                <span class="cnum">剩余人数</span>
+                <span class="campus">校区</span>
+            </li>
+            {% for course in course_li %}
+            <li cid="{{course.id}}" tid="{{course.tid}}">
+                <span class="cname">{{course.cname}}</span>
+                <span class="ctype">{{course.ctype}}</span>
+                <span class="ctime">{{course.ctime}}</span>
+                <span class="cplace">{{course.croom}}</span>
+                <span class="tname">{{course.tname}}</span>
+                <span class="credit">{{course.credit}}</span>
+                <span class="cnum">{{course.cnum}}</span>
+                <span class="campus">{{course.caname}}</span>
+                <button class="btn btn-primary add" cid="{{course.id}}">添加</button>
+            </li>
+            {% endfor %}
+        </ul>
+        <div id="pre">
+            <span>已选课程：</span>
+            {% for course in preview_li %}
+            <div cid="{{course.id}}">
+                {{course.cname}}
+                <button class="btn btn-danger del" cid="{{course.id}}">删除</button>
+            </div>
+            {% endfor %}
+        </div>
+        <div id="sel_course">
+            <span>成功选课：</span>
+            {% for sel in sel_li %}
+            <div cid={{sel.cid}}>
+                <span>{{sel.course.cname}}</span>
+                <button class="btn btn-danger remove" cid={{sel.cid}}>退选</button>
+            </div>
+            {% endfor %}
+        </div>
+        <div id="func">
+            <button id="sel" class="btn btn-success">选课提交</button>
+        </div>
+        <br>
+    </div>
+    {% import "footer.html" as f_add%}
+    {{ f_add.footer() }}
+    <script src="/static/js/sel_course.js"></script>
+</body>
+
+</html>

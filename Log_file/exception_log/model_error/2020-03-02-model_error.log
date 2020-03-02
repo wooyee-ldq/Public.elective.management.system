@@ -1,0 +1,8 @@
+2020-03-02 22:33:42 : catching classes that do not inherit from BaseException is not allowed
+2020-03-02 22:40:28 : catching classes that do not inherit from BaseException is not allowed
+2020-03-02 22:41:01 : catching classes that do not inherit from BaseException is not allowed
+2020-03-02 22:44:54 : catching classes that do not inherit from BaseException is not allowed
+2020-03-02 22:44:58 : catching classes that do not inherit from BaseException is not allowed
+2020-03-02 23:29:22 : remove_sel() missing 1 required positional argument: 'caid'
+2020-03-02 23:30:22 : remove_sel() missing 1 required positional argument: 'caid'
+2020-03-02 23:30:29 : remove_sel() missing 1 required positional argument: 'caid'
