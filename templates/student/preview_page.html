@@ -6,7 +6,12 @@
     <title>课程预选页面</title>
     <link rel="stylesheet" href="/static/css/header.css">
     <link rel="stylesheet" href="/static/css/footer.css">
-    <link rel="stylesheet" href="/static/css/course_preview.css">
+    <link rel="stylesheet" href="/static/css/preview_page.css">
+    <script type="text/javascript" src="/static/js/jquery-3.4.1/jquery-3.4.1.min.js"></script>
+    <link rel='stylesheet' href='/static/css/bootstrap/css/bootstrap.min.css' />
+    <script type="text/javascript" src="/static/css/bootstrap/js/bootstrap.min.js"></script>
+    <meta name="viewport" ,content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
 </head>
 
 <body>
@@ -22,7 +27,7 @@
                 <span class="cplace">上课地点</span>
                 <span class="tname">课程教师</span>
                 <span class="credit">学分</span>
-                <span class="cnum">人数</span>
+                <span class="cnum">开课人数</span>
                 <span class="campus">校区</span>
             </li>
             {% for course in course_li %}
@@ -35,12 +40,27 @@
                 <span class="credit">{{course.credit}}</span>
                 <span class="cnum">{{course.cnum}}</span>
                 <span class="campus">{{course.caname}}</span>
+                <button class="btn btn-primary add" cid="{{course.id}}">添加</button>
             </li>
             {% endfor %}
         </ul>
+        <div id="pre">
+            <span>已选课程：</span>
+            {% for course in preview_li %}
+            <div cid="{{course.id}}">
+                {{course.cname}}
+                <button class="btn btn-danger del" cid="{{course.id}}">删除</button>
+            </div>
+            {% endfor %}
+        </div>
+        <div id="func">
+            <button id="preview" class="btn btn-success">预选提交</button>
+        </div>
+        <br>
     </div>
     {% import "footer.html" as f_add%}
     {{ f_add.footer() }}
+    <script src="/static/js/preview_page.js"></script>
 </body>
 
 </html>
