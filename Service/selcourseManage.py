@@ -1,4 +1,6 @@
 # coding:utf-8
+import time
+
 from Log.exceptionLog import ExceptionLog
 from Model.model import Selcourses, db
 
@@ -57,16 +59,20 @@ class SelcourseManage(object):
             ExceptionLog.model_error(e.__str__())
             return list()
 
-    # @classmethod
-    # def get_by_sidnoend(cls, sid):
-    #     try:
-    #         cosel_li = Selcourses.query.filter_by(sid=sid, isend=0)
-    #         return cls.list_to_dict(cosel_li)
-    #
-    #     except Exception as e:
-    #         print(e)
-    #         ExceptionLog.model_error(e.__str__())
-    #         return None
+    @classmethod
+    def get_by_sidnoend(cls, sid):
+        try:
+            cosel_li = Selcourses.query.filter_by(sid=sid)
+            sel_li = list()
+            for sel in cosel_li:
+                if sel.course.isend == 0:
+                    sel_li.append(sel)
+            return cls.list_to_dict(sel_li)
+
+        except Exception as e:
+            print(e)
+            ExceptionLog.model_error(e.__str__())
+            return list()
 
     @classmethod
     def get_by_cid(cls, cid):
@@ -80,12 +86,12 @@ class SelcourseManage(object):
             return list()
 
     @staticmethod
-    def add(sid, cid, isend=0):
-
+    def add(sid, cid):
+        now_time = time.strftime("%Y-%m-%d %H:%M:%S", time.localtime())
         selco = Selcourses(
             sid=sid,
             cid=cid,
-            isend=isend
+            cretime=now_time
         )
         try:
             db.session.add(selco)
@@ -100,7 +106,6 @@ class SelcourseManage(object):
             except Exception as ex:
                 print(ex)
                 ExceptionLog.other_error(ex.__str__())
-
             return False
 
     @staticmethod
