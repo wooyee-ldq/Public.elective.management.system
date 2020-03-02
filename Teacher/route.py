@@ -102,9 +102,10 @@ def achievement_save_page():
     tea = session.get("tea")
     if tea is None:
         return render_template("page404.html"), 404
+    if TeaService.is_can_saveachi(tea.caid) is False:
+        return "要在选课结束后才能进行成绩录入！"
 
     course_li = TeaService.get_notachi_li(tea.id)
-
     return render_template("teacher/achievement_save.html", course_li=course_li)
 
 
