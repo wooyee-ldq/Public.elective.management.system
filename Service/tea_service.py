@@ -1,5 +1,6 @@
 # coding:utf-8
 from Log.exceptionLog import ExceptionLog
+from Service.redis_service import RedisService
 from .selcourseManage import SelcourseManage
 from .courseManage import CourseManage
 from .achievementManage import AchievementManage
@@ -142,4 +143,9 @@ class TeaService(object):
                 print(e)
                 ExceptionLog.model_error(e.__str__())
             return False
+
+    @staticmethod
+    def is_can_saveachi(caid):
+        """判断是否可以进行成绩录入"""
+        return RedisService.judge_can_saveachi(caid)
 
