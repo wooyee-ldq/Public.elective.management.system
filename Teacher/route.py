@@ -268,24 +268,24 @@ def course_apply():
             "bl": 400,
             "tip": "账号已下线，请重新登录！"
         })
+    data = request.form  # 获取请求体表格形式数据
+    cname = data.get("cname")  # 课程名称
+    ctype = data.get("ctype")  # 课程类型
+    cweek = data.get("cweek")  # 上课星期
+    ctime = data.get("ctime") + ":00"  # 上课时间
+    rid = data.get("rid")  # 教室号
+    credit = data.get("credit")  # 课程学分
+    cnum = data.get("cnum")  # 开课人数
+    tid = tea.id  # 开课教师id
+    caid = tea.caid  # 开课校区id，该校区id是申请教师的校区id，所以本校区开设的课程只能在本校区
 
-    data = request.form
-    cname = data.get("cname")
-    ctype = data.get("ctype")
-    cweek = data.get("cweek")
-    ctime = data.get("ctime") + ":00"
-    rid = data.get("rid")
-    credit = data.get("credit")
-    cnum = data.get("cnum")
-    tid = tea.id
-    caid = tea.caid
-
-    if CourseManage.iscan_apply(cweek, ctime, rid) is True:
+    if CourseManage.iscan_apply(cweek, ctime, rid) is True:# 判断开课的时间、地点是否冲突
         return jsonify({
             "bl": 400,
             "tip": cweek + " " + ctime + " 教室:" + ClassroomManage.get_rname(rid) + "已被申请！"
         })
 
+    # 执行课程添加操作，成功返回True
     bl = CourseManage.add(cname, ctype, cweek, ctime, rid, tid, credit, cnum, caid)
     if bl is True:
         return jsonify({

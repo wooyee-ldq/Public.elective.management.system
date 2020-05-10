@@ -1,10 +1,31 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <title>404</title>
+    <link rel="stylesheet" href="/static/css/header.css">
+    <link rel="stylesheet" href="/static/css/footer.css">
+    <link rel="stylesheet" href="/static/css/nav_index.css">
+    <style>
+        body {
+            background-color: cadetblue;
+        }
+        h2{
+            text-align: center;
+            height: 400px;
+            padding-top: 200px;
+            color: #fff;
+        }
+    </style>
 </head>
+
 <body>
-    <h2>404 NOT FOUND</h2>
+    {% import "header.html" as h_add%}
+    {{ h_add.header() }}
+    <h2>哎呀！页面跑丢了...</h2>
+    {% import "footer.html" as f_add%}
+    {{ f_add.footer() }}
 </body>
+
 </html>

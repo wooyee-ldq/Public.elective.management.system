@@ -35,7 +35,7 @@ class StuService(object):
                 achi_sum += 1
                 gp_sum += achi.get("gradepoint")
 
-        return crd_sum, gp_sum/achi_sum
+        return crd_sum, gp_sum/achi_sum if achi_sum > 0 else 0
 
     @staticmethod
     def get_predone(sno):

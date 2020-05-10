@@ -37,10 +37,10 @@ class LoginCheck(object):
     @staticmethod
     def stu_pwd_check(user, pwd):
         stu = None
-
         try:
             user = int(user)
-            pwd = Encryption.md5(pwd)
+            pwd = Encryption.md5(pwd)  # 加密转换密码
+            # 通过账号和密码查询数据库，获取用户信息对象
             stu = Students.query.filter_by(sno=user, password=pwd).first()
 
         except Exception as e:
@@ -48,7 +48,7 @@ class LoginCheck(object):
             ExceptionLog.model_error(e.__str__())
             print(e)
 
-        return stu
+        return stu  # 返回用户信息对象，如果没有则为None
 
     @staticmethod
     def stu_to_dict(stu):
