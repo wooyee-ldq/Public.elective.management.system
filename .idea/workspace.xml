@@ -1,16 +1,8 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="e61b2c5b-ca69-43a2-807c-3fe8c199da51" name="Default Changelist" comment="">
+    <list default="true" id="e61b2c5b-ca69-43a2-807c-3fe8c199da51" name="Default Changelist" comment="修改404页面界面样式和解决学生模块成绩查看的除0问题。">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Log_file/exception_log/model_error/2020-03-03-model_error.log" beforeDir="false" afterPath="$PROJECT_DIR$/Log_file/exception_log/model_error/2020-03-03-model_error.log" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Log_file/login_log/login_success/2020-03-03-login_success.log" beforeDir="false" afterPath="$PROJECT_DIR$/Log_file/login_log/login_success/2020-03-03-login_success.log" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Service/loginCheck.py" beforeDir="false" afterPath="$PROJECT_DIR$/Service/loginCheck.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Service/stu_service.py" beforeDir="false" afterPath="$PROJECT_DIR$/Service/stu_service.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Teacher/route.py" beforeDir="false" afterPath="$PROJECT_DIR$/Teacher/route.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/WTF_Form/login_form.py" beforeDir="false" afterPath="$PROJECT_DIR$/WTF_Form/login_form.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/templates/footer.html" beforeDir="false" afterPath="$PROJECT_DIR$/templates/footer.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/templates/page404.html" beforeDir="false" afterPath="$PROJECT_DIR$/templates/page404.html" afterDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
@@ -52,7 +44,6 @@
   <component name="IdeDocumentHistory">
     <option name="CHANGED_PATHS">
       <list>
-        <option value="$PROJECT_DIR$/WTF_Form/__init__.py" />
         <option value="$PROJECT_DIR$/WTF_Form/teaAndstu_login_form.py" />
         <option value="$PROJECT_DIR$/WTF_Form/admin_login_form.py" />
         <option value="$PROJECT_DIR$/Log/loginLog.py" />
@@ -103,6 +94,7 @@
         <option value="$PROJECT_DIR$/Service/loginCheck.py" />
         <option value="$PROJECT_DIR$/Teacher/route.py" />
         <option value="$PROJECT_DIR$/Service/stu_service.py" />
+        <option value="$PROJECT_DIR$/templates/page404.html" />
       </list>
     </option>
   </component>
@@ -132,16 +124,6 @@
             <path>
               <item name="pecms" type="b2602c69:ProjectViewProjectNode" />
               <item name="pecms" type="462c0819:PsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="pecms" type="b2602c69:ProjectViewProjectNode" />
-              <item name="pecms" type="462c0819:PsiDirectoryNode" />
-              <item name="Admin" type="462c0819:PsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="pecms" type="b2602c69:ProjectViewProjectNode" />
-              <item name="pecms" type="462c0819:PsiDirectoryNode" />
-              <item name="Student" type="462c0819:PsiDirectoryNode" />
             </path>
           </expand>
           <select />
@@ -366,7 +348,7 @@
       <workItem from="1583254606385" duration="80000" />
       <workItem from="1584805784850" duration="744000" />
       <workItem from="1587289306695" duration="211000" />
-      <workItem from="1589126256570" duration="607000" />
+      <workItem from="1589126256570" duration="2726000" />
     </task>
     <task id="LOCAL-00001" summary="update1 pip模块列表文件">
       <created>1582986068616</created>
@@ -438,11 +420,18 @@
       <option name="project" value="LOCAL" />
       <updated>1583166590246</updated>
     </task>
-    <option name="localTasksCounter" value="11" />
+    <task id="LOCAL-00011" summary="修改404页面界面样式和解决学生模块成绩查看的除0问题。">
+      <created>1589127195906</created>
+      <option name="number" value="00011" />
+      <option name="presentableId" value="LOCAL-00011" />
+      <option name="project" value="LOCAL" />
+      <updated>1589127195906</updated>
+    </task>
+    <option name="localTasksCounter" value="12" />
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="384677000" />
+    <option name="totallyTimeSpent" value="386796000" />
   </component>
   <component name="TodoView">
     <todo-panel id="selected-file">
@@ -456,7 +445,7 @@
   <component name="ToolWindowManager">
     <frame x="0" y="25" width="1920" height="1055" extended-state="6" />
     <layout>
-      <window_info active="true" content_ui="combo" id="Project" order="0" sideWeight="0.49836424" visible="true" weight="0.17148982" />
+      <window_info content_ui="combo" id="Project" order="0" sideWeight="0.49836424" visible="true" weight="0.19346195" />
       <window_info id="Structure" order="1" side_tool="true" weight="0.25" />
       <window_info id="Favorites" order="2" sideWeight="0.5016358" side_tool="true" weight="0.19346195" />
       <window_info anchor="bottom" id="Message" order="0" />
@@ -467,7 +456,7 @@
       <window_info anchor="bottom" id="Inspection" order="5" weight="0.4" />
       <window_info anchor="bottom" id="TODO" order="6" weight="0.3293348" />
       <window_info anchor="bottom" id="Docker" order="7" show_stripe_button="false" />
-      <window_info anchor="bottom" id="Version Control" order="8" />
+      <window_info active="true" anchor="bottom" id="Version Control" order="8" visible="true" weight="0.32967034" />
       <window_info anchor="bottom" id="Database Changes" order="9" />
       <window_info anchor="bottom" id="Event Log" order="10" side_tool="true" />
       <window_info anchor="bottom" id="Terminal" order="11" weight="0.3293348" />
@@ -482,10 +471,37 @@
   <component name="TypeScriptGeneratedFilesManager">
     <option name="version" value="1" />
   </component>
+  <component name="Vcs.Log.Tabs.Properties">
+    <option name="TAB_STATES">
+      <map>
+        <entry key="MAIN">
+          <value>
+            <State>
+              <option name="RECENTLY_FILTERED_USER_GROUPS">
+                <collection />
+              </option>
+              <option name="RECENTLY_FILTERED_BRANCH_GROUPS">
+                <collection />
+              </option>
+              <option name="COLUMN_ORDER">
+                <list>
+                  <option value="0" />
+                  <option value="1" />
+                  <option value="2" />
+                  <option value="3" />
+                </list>
+              </option>
+            </State>
+          </value>
+        </entry>
+      </map>
+    </option>
+  </component>
   <component name="VcsManagerConfiguration">
     <MESSAGE value="update1 pip模块列表文件" />
     <MESSAGE value="update2" />
-    <option name="LAST_COMMIT_MESSAGE" value="update2" />
+    <MESSAGE value="修改404页面界面样式和解决学生模块成绩查看的除0问题。" />
+    <option name="LAST_COMMIT_MESSAGE" value="修改404页面界面样式和解决学生模块成绩查看的除0问题。" />
   </component>
   <component name="com.intellij.coverage.CoverageDataManagerImpl">
     <SUITE FILE_PATH="coverage/pecms$model__1_.coverage" NAME="model (1) Coverage Results" MODIFIED="1580710159459" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$" />
@@ -501,13 +517,6 @@
     <SUITE FILE_PATH="coverage/pecms$model.coverage" NAME="model Coverage Results" MODIFIED="1580722897154" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/Model" />
   </component>
   <component name="editorHistoryManager">
-    <entry file="file://$PROJECT_DIR$/Model/myModelView.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="768">
-          <caret line="319" column="40" selection-start-line="319" selection-start-column="40" selection-end-line="319" selection-end-column="40" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/Log_file/login_log/login_error/2020-02-21-login_error.log">
       <provider selected="true" editor-type-id="text-editor" />
     </entry>
@@ -870,6 +879,13 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="1077">
           <caret line="293" column="10" selection-start-line="293" selection-start-column="10" selection-end-line="293" selection-end-column="10" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/templates/page404.html">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="616">
+          <caret line="28" selection-start-line="28" selection-end-line="28" />
         </state>
       </provider>
     </entry>
