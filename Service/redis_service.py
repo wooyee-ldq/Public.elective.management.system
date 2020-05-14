@@ -115,7 +115,7 @@ class RedisService(object):
 
         except Exception as e:
             print(e)
-            ExceptionLog.other_error(e.__str__())
+            ExceptionLog.model_error(e.__str__())
             raise e
 
     @staticmethod

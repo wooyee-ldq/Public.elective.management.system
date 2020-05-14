@@ -267,6 +267,17 @@ class CourseManage(object):
             return list()
 
     @classmethod
+    def get_can_add_to_redis(cls, caid):
+        try:
+            course_li = Courses.query.filter_by(caid=caid, isend=0, ispass=1, isexamine=1)
+            return course_li
+
+        except Exception as e:
+            print(e)
+            ExceptionLog.model_error(e.__str__())
+            return None
+
+    @classmethod
     def get_by_tid_pass(cls, tid):
         try:
             course_li = Courses.query.filter_by(tid=tid, ispass=1, isexamine=1)

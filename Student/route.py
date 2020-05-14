@@ -3,6 +3,7 @@
 
 from flask import render_template, request, jsonify, session, redirect, url_for
 
+from Service.campusManage import CampusManage
 from Service.changePwd import ChangePwd
 from Service.loginCheck import LoginCheck
 from Service.noticeManage import NoticeManage
@@ -116,32 +117,64 @@ def grade_get():
                            gpa=gpa)
 
 
-@app_stu.route("/coursePreview")
+@app_stu.route("/coursePreview", methods=["POST", "GET"])
 def course_preview():
     """课程预览页面"""
     stu = session.get("stu")
     if stu is None:
         return render_template("page404.html"), 404
 
-    campus_li = StuService.get_preview_course()
+    data = request.form
+    page = int(data.get("page", request.args.get("page", 1)))
+    caid = int(data.get("caid", session.get("caid", -1)))
+    ctype = data.get("ctype", session.get("ctype", "all"))
+    week = data.get("week", session.get("week", "all"))
+    session["caid"] = caid
+    session["ctype"] = ctype
+    session["week"] = week
 
-    return render_template("student/course_preview.html", campus_li=campus_li)
+    course_li, sum, pagenum, page = StuService.get_preview_course(caid, ctype, week, page, 3)
+    campus_li = CampusManage.get_all()
+
+    return render_template("student/course_preview.html",
+                           campus_li=campus_li,
+                           course_li=course_li,
+                           page=page,
+                           pagenum=pagenum,
+                           sum=sum)
 
 
-@app_stu.route("/previewPage")
+@app_stu.route("/previewPage", methods=["POST", "GET"])
 def preview_page():
     """课程预选页面"""
     stu = session.get("stu")
     if stu is None:
         return render_template("page404.html"), 404
+
+    crd_sum = StuService.count_credit(stu.id)
+    if crd_sum >= 33:
+        return render_template("not_allow.html", message="所修学分已满，不需要选课...")
+
     if RedisService.judge_can_sel(stu):
         return redirect(url_for("app_stu.sel_course_page"))
 
-    course_li = StuService.get_preview_bycaid(stu.caid)
+    data = request.form
+    page = int(data.get("page", request.args.get("page", 1)))
+    caid = stu.caid
+    ctype = data.get("ctype", session.get("ctype", "all"))
+    week = data.get("week", session.get("week", "all"))
+    session["caid"] = caid
+    session["ctype"] = ctype
+    session["week"] = week
+
+    course_li, sum, pagenum, page = StuService.get_preview_course(caid, ctype, week, page, 4)
     preview_li = StuService.get_predone(stu.sno)
 
     return render_template("student/preview_page.html",
                            course_li=course_li,
+                           page=page,
+                           pagenum=pagenum,
+                           sum=sum,
                            preview_li=preview_li)
 
 
@@ -172,7 +205,7 @@ def course_record():
     return render_template("student/course_record.html", selcourse_li=selcourse_li)
 
 
-@app_stu.route("/selCoursePage")
+@app_stu.route("/selCoursePage", methods=["POST", "GET"])
 def sel_course_page():
     """选课操作页面"""
     stu = session.get("stu")
@@ -180,16 +213,32 @@ def sel_course_page():
         return render_template("page404.html"), 404
 
     if RedisService.judge_can_sel(stu) is False:
-        return "不在选课时段"
+        return render_template("not_allow.html", message="不在选课时段，无法进行选课和退选...")
 
-    course_li = StuService.get_preview_bycaid(stu.caid)
+    crd_sum = StuService.count_credit(stu.id)
+    if crd_sum >= 33:
+        return render_template("not_allow.html", message="所修学分已满，不需要选课...")
+
+    data = request.form
+    page = int(data.get("page", request.args.get("page", 1)))
+    caid = stu.caid
+    ctype = data.get("ctype", session.get("ctype", "all"))
+    week = data.get("week", session.get("week", "all"))
+    session["caid"] = caid
+    session["ctype"] = ctype
+    session["week"] = week
+
+    course_li, sum, pagenum, page = StuService.get_preview_course(caid, ctype, week, page, 4)
     preview_li = StuService.get_predone(stu.sno)
     sel_li = SelcourseManage.get_by_sidnoend(stu.id)
 
     return render_template("student/sel_course.html",
                            course_li=course_li,
                            preview_li=preview_li,
-                           sel_li=sel_li)
+                           sel_li=sel_li,
+                           page=page,
+                           pagenum=pagenum,
+                           sum=sum)
 
 
 @app_stu.route("/selCourse", methods=["POST"])

@@ -132,6 +132,7 @@ class Courses(db.Model):
             "id": self.id,
             "cname": self.cname,
             "ctype": self.ctype,
+            "week": self.classweek,
             "ctime": str(self.classweek) + str(self.classtime),
             "croom": self.classroom.rname,
             "cnum": self.cnum,

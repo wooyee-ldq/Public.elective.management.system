@@ -7,6 +7,9 @@
     <link rel="stylesheet" href="/static/css/header.css">
     <link rel="stylesheet" href="/static/css/footer.css">
     <link rel="stylesheet" href="/static/css/course_preview.css">
+    <script type="text/javascript" src="/static/js/jquery-3.4.1/jquery-3.4.1.min.js"></script>
+    <link rel='stylesheet' href='/static/css/bootstrap/css/bootstrap.min.css' />
+    <script type="text/javascript" src="/static/css/bootstrap/js/bootstrap.min.js"></script>
 </head>
 
 <body>
@@ -15,31 +18,74 @@
     <div id="main">
         <p>课程预览</p>
         <ul id="course">
-            {% for campus in campus_li %}
-                <div>{{campus.caname}}</div>
-                <li id="tip">
-                    <span class="cname">课程名称</span>
-                    <span class="ctype">课程类型</span>
-                    <span class="ctime">上课时间</span>
-                    <span class="cplace">上课地点</span>
-                    <span class="tname">课程教师</span>
-                    <span class="credit">学分</span>
-                    <span class="cnum">人数</span>
-                    <span class="campus">校区</span>
-                </li>
-                {% for course in campus["course_li"] %}
-                <li cid="{{course.id}}" tid="{{course.tid}}">
-                    <span class="cname">{{course.cname}}</span>
-                    <span class="ctype">{{course.ctype}}</span>
-                    <span class="ctime">{{course.ctime}}</span>
-                    <span class="cplace">{{course.croom}}</span>
-                    <span class="tname">{{course.tname}}</span>
-                    <span class="credit">{{course.credit}}</span>
-                    <span class="cnum">{{course.cnum}}</span>
-                    <span class="campus">{{course.caname}}</span>
-                </li>
-                {% endfor %}
+            <li id="choose">
+                <form action="{{url_for('app_stu.course_preview')}}" method="POST">
+                    <span>校区:</span>
+                    <select name="caid" id="caid">
+                        <option value="-1">全部</option>
+                        {% for campus in campus_li %}
+                        <option value="{{campus.id}}">{{campus.caname}}</option>
+                        {% endfor %}
+                    </select>&nbsp;&nbsp;
+                    <span>课程类型:</span>
+                    <select name="ctype" id="type">
+                        <option value="all" aria-checked="true">全部</option>
+                        <option value="非限定性艺术类">非限定性艺术类</option>
+                        <option value="限定性艺术类">限定性艺术类</option>
+                    </select>&nbsp;&nbsp;
+                    <span>上课星期:</span>
+                    <select name="week" id="week">
+                        <option value="all">全部</option>
+                        <option value="星期一">星期一</option>
+                        <option value="星期二">星期二</option>
+                        <option value="星期三">星期三</option>
+                        <option value="星期四">星期四</option>
+                        <option value="星期五">星期五</option>
+                        <option value="星期六">星期六</option>
+                        <option value="星期日">星期日</option>
+                    </select>&nbsp;&nbsp;
+                    <input type="submit" class="btn btn-primary" value="筛选"></input>
+                </form>
+            </li>
+            <li id="tip">
+                <span class="cname">课程名称</span>
+                <span class="ctype">课程类型</span>
+                <span class="ctime">上课时间</span>
+                <span class="cplace">上课地点</span>
+                <span class="tname">课程教师</span>
+                <span class="credit">学分</span>
+                <span class="cnum">人数</span>
+                <span class="campus">校区</span>
+            </li>
+            {% for course in course_li %}
+            <li cid="{{course.id}}" tid="{{course.tid}}">
+                <span class="cname">{{course.cname}}</span>
+                <span class="ctype">{{course.ctype}}</span>
+                <span class="ctime">{{course.ctime}}</span>
+                <span class="cplace">{{course.croom}}</span>
+                <span class="tname">{{course.tname}}</span>
+                <span class="credit">{{course.credit}}</span>
+                <span class="cnum">{{course.cnum}}</span>
+                <span class="campus">{{course.caname}}</span>
+            </li>
             {% endfor %}
+            <li id="page">
+                {% if page > 1 %}
+                <a class="allnext" href="{{url_for('app_stu.course_preview')}}?page={{page-1}}">上一页</a>
+                {%endif%}
+                {% for i in range(pagenum) %}
+                    {% if (i+1) == page %}
+                    <a class="nowpage" href="#">{{i+1}}</a>
+                    {%endif%}
+                    {% if (i+1) != page %}
+                    <a class="page" href="{{url_for('app_stu.course_preview')}}?page={{i+1}}">{{i+1}}</a>
+                    {%endif%}
+                {%endfor%}
+                {% if page < pagenum %}
+                <a class="allnext" href="{{url_for('app_stu.course_preview')}}?page={{page+1}}">下一页</a>
+                {%endif%}
+                <span>共{{sum}}条记录</span>
+            </li>
         </ul>
     </div>
     {% import "footer.html" as f_add%}

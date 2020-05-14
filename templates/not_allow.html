@@ -3,7 +3,7 @@
 
 <head>
     <meta charset="UTF-8">
-    <title>404</title>
+    <title>Handle not allowed</title>
     <link rel="stylesheet" href="/static/css/header.css">
     <link rel="stylesheet" href="/static/css/footer.css">
     <link rel="stylesheet" href="/static/css/nav_index.css">
@@ -16,10 +16,6 @@
             height: 400px;
             padding-top: 200px;
             color: #fff;
-            font-size: 36px;
-        }
-        .little{
-            font-size: 26px;
         }
     </style>
 </head>
@@ -27,11 +23,7 @@
 <body>
     {% import "header.html" as h_add%}
     {{ h_add.header() }}
-    <h2>
-        <div>哎呀！页面跑到火星去了...</div>
-        <div class="little">404 Not Found: The requested URL was not found on the server.</div>
-        <div class="little">If you entered the URL manually please check your spelling and try again.</div>
-    </h2>
+    <h2>{{ message }}</h2>
     {% import "footer.html" as f_add%}
     {{ f_add.footer() }}
 </body>

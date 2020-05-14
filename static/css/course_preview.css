@@ -23,6 +23,37 @@
     overflow: auto;
 }
 
+#choose{
+    text-align: center;
+}
+
+#page{
+    background-color: #fff;
+    height: 26px;
+    line-height: 26px;
+    font-size: 22px;
+    text-align: center;
+    margin: 20px 0px;
+}
+
+.allnext{
+    display: inline-block;
+    text-decoration: none;
+    background-color: cadetblue;
+    text-align: center;
+    color: #fff;
+    width: 80px;
+}
+
+.page{
+    display: inline-block;
+    text-decoration: none;
+    background-color: #0088cc;
+    color: #fff;
+    width: 26px;
+    text-align: center;
+}
+
 li{
     list-style: none;
     text-align: left;

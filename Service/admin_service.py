@@ -45,6 +45,12 @@ class AdminService(object):
     @staticmethod
     def set_seltime(stime, etime, remark, caid, lid):
         """设置选课时段操作"""
+        # 查询数据库，并把没有添加到缓存未结束的课程添加到redis
+        course_li = CourseManage.get_can_add_to_redis(caid)
+        if course_li is not None:
+            for course in course_li:
+                RedisService.load_agree_course(Courses.list_to_dict(course))
+
         # 保存记录到mysql，添加数据缓存到redis
         return RedisService.set_sel_time(stime, etime, caid, lid, remark)
 

@@ -32,3 +32,15 @@ class CampusManage(object):
             print(e)
             ExceptionLog.model_error(e.__str__())
             return list()
+
+    @classmethod
+    def get_by_id(cls, caid):
+        try:
+            campus_li = Campuses.query.get(caid)
+            return cls.list_to_dict([campus_li])[0]
+
+        except Exception as e:
+            print(e)
+            ExceptionLog.model_error(e.__str__())
+            return list()
+

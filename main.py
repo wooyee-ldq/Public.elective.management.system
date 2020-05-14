@@ -73,6 +73,11 @@ def admin_console_examine():
             return "无权限使用该功能，请使用超级管理员身份"
 
 
+@app.errorhandler(404)
+def page_not_found(e):
+    return render_template("page404.html"), 404
+
+
 def add_model_view():
     from Model.model import Admins, Students, Teachers, \
         Selcourses, Courses, Coseltime, Achievements,\

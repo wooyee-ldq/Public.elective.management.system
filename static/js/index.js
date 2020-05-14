@@ -20,4 +20,13 @@ $(document).ready(function(){
         $("#exit").slideToggle(500);
     })
 
+    //  // 关闭浏览器事件
+    //  $(window).bind('beforeunload',function(){
+    //     alert("确认要离开此页面吗？")
+    //     let bl = confirm("确认要离开此页面吗？")
+    //     if(bl){
+    //         $.get($("#exit a").attr("href"))
+    //     }
+    // })
+
 })

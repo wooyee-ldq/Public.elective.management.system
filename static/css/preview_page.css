@@ -23,13 +23,45 @@
     overflow: auto;
 }
 
+#choose{
+    text-align: center;
+    height: 40px;
+}
+
+#page{
+    background-color: #fff;
+    height: 26px;
+    line-height: 26px;
+    font-size: 22px;
+    text-align: center;
+    margin: 20px 0px;
+}
+
+.allnext{
+    display: inline-block;
+    text-decoration: none;
+    background-color: cadetblue;
+    text-align: center;
+    color: #fff;
+    width: 80px;
+}
+
+.page{
+    display: inline-block;
+    text-decoration: none;
+    background-color: #0088cc;
+    color: #fff;
+    width: 26px;
+    text-align: center;
+}
+
 li{
     list-style: none;
     text-align: left;
     font-size: 16px;
     margin: 2px 0px;
-    height: 24px;
-    line-height: 24px;
+    /* height: 24px;
+    line-height: 24px; */
     background-color: rgb(142, 187, 202);
 }
 
