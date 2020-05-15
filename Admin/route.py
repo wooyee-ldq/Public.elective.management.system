@@ -8,6 +8,7 @@ from Service.campusManage import CampusManage
 from Service.changePwd import ChangePwd
 from Service.levelManage import LevelManage
 from Service.loginCheck import LoginCheck
+from Service.redis_service import RedisService
 from Service.teaManage import TeaManage
 from Service.stuManage import StuManage
 from Service.courseManage import CourseManage
@@ -388,27 +389,122 @@ def notice_over():
         })
 
 
-#
-# @app_admin.route("/teaManage")
-# def tea_manage():
-#     """显示教师信息的教师管理页面"""
-#     admin = session.get("admin")
-#     if admin is None:
-#         return render_template("page404.html"), 404
-#
-#     tea_li = TeaManage.get_all()
-#     return render_template("admin/tea_manage.html", tea_li=tea_li)  # 返回教师管理页面信息
-#
-#
-# @app_admin.route("/stuManage")
-# def stu_manage():
-#     """显示学生信息的学生管理页面"""
-#     admin = session.get("admin")
-#     if admin is None:
-#         return render_template("page404.html"), 404
-#
-#     stu_li = StuManage.get_all()
-#     return render_template("admin/stu_manage.html", stu_li=stu_li)  # 返回学生管理页面信息
+@app_admin.route("/teaManage")
+def tea_manage():
+    """显示教师信息的教师管理页面"""
+    admin = session.get("admin")
+    if admin is None:
+        return render_template("page404.html"), 404
+
+    tea_li = TeaManage.get_all()
+    black_li = RedisService.get_tea_blacklist()
+    return render_template("admin/tea_manage.html",
+                           tea_li=tea_li,
+                           black_li=black_li)  # 返回教师管理页面信息
+
+
+@app_admin.route("/stuManage")
+def stu_manage():
+    """显示学生信息的学生管理页面"""
+    admin = session.get("admin")
+    if admin is None:
+        return render_template("page404.html"), 404
+
+    stu_li = StuManage.get_all()
+    black_li = RedisService.get_stu_blacklist()
+    return render_template("admin/stu_manage.html",
+                           stu_li=stu_li,
+                           black_li=black_li)  # 返回学生管理页面信息
+
+
+@app_admin.route("/teaAgree", methods=["POST"])
+def tea_agree():
+    admin = session.get("admin")
+    if admin is None:
+        return jsonify({
+            "bl": 400,
+            "tip": "账号已下线，请重新登录！"
+        })
+    tid = request.form.get("tid")
+    bl = RedisService.tea_agree(tid)
+    if bl is True:
+        return jsonify({
+            "bl": 200,
+            "tip": "解除操作成功！"
+        })
+    else:
+        return jsonify({
+            "bl": 400,
+            "tip": "解除操作失败！"
+        })
+
+
+@app_admin.route("/teaRefuse", methods=["POST"])
+def tea_refuse():
+    admin = session.get("admin")
+    if admin is None:
+        return jsonify({
+            "bl": 400,
+            "tip": "账号已下线，请重新登录！"
+        })
+    tid = request.form.get("tid")
+    bl = RedisService.tea_refuse(tid)
+    if bl is True:
+        return jsonify({
+            "bl": 200,
+            "tip": "禁止开课操作成功！"
+        })
+    else:
+        return jsonify({
+            "bl": 400,
+            "tip": "禁止开课操作失败！"
+        })
+
+
+@app_admin.route("/stuAgree", methods=["POST"])
+def stu_agree():
+    admin = session.get("admin")
+    if admin is None:
+        return jsonify({
+            "bl": 400,
+            "tip": "账号已下线，请重新登录！"
+        })
+
+    sid = request.form.get("sid")
+    bl = RedisService.stu_agree(sid)
+    if bl is True:
+        return jsonify({
+            "bl": 200,
+            "tip": "解除操作成功！"
+        })
+    else:
+        return jsonify({
+            "bl": 400,
+            "tip": "解除操作失败！"
+        })
+
+
+@app_admin.route("/stuRefuse", methods=["POST"])
+def stu_refuse():
+    admin = session.get("admin")
+    if admin is None:
+        return jsonify({
+            "bl": 400,
+            "tip": "账号已下线，请重新登录！"
+        })
+    sid = request.form.get("sid")
+    bl = RedisService.stu_refuse(sid)
+    if bl is True:
+        return jsonify({
+            "bl": 200,
+            "tip": "禁止选课操作成功！"
+        })
+    else:
+        return jsonify({
+            "bl": 400,
+            "tip": "禁止选课操作失败！"
+        })
+
 #
 #
 # @app_admin.route("/teaAdd", methods=["POST"])

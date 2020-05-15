@@ -74,6 +74,7 @@ def admin_console_examine():
 
 
 @app.errorhandler(404)
+@app.errorhandler(405)
 def page_not_found(e):
     return render_template("page404.html"), 404
 

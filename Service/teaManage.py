@@ -24,7 +24,10 @@ class TeaManage(object):
                 "tname": tea.tname,
                 "tsex": sex[tea.tsex],
                 "collegename": tea.college.collname,
-                "tel": tea.tel
+                "tel": tea.tel,
+                "campusname": tea.campus.caname,
+                "collid": tea.collid,
+                "caid": tea.caid
             }
 
             li_dict.append(data)

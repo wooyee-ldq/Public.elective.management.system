@@ -1,0 +1,85 @@
+#main{
+    height: 640px;
+    text-align: center;
+    margin: 0px auto;
+    width: 1050px;
+    overflow: auto;
+}
+
+#main p{
+    font-size: 26px;
+    color: #08c;
+    margin: 10px 0px;
+}
+
+#nav li{
+    height: 26px;
+    line-height: 26px;
+    font-size: 24px;
+    text-align: center;
+    background-color: #ffffff;
+}
+
+.tip{
+    font-size: 22px;
+    color: #ffffff;
+    background-color: cadetblue;
+}
+
+li{
+    list-style: none;
+    text-align: left;
+    font-size: 16px;
+    margin: 2px 0px;
+    background-color: rgb(142, 187, 202)
+}
+
+.sno{
+    display: inline-block;
+    width: 150px;
+    text-align: center;
+    padding: 2px 10px;
+}
+
+.sname{
+    display: inline-block;
+    width: 100px;
+    text-align: center;
+    padding: 2px 10px;
+}
+
+.ssex{
+    display: inline-block;
+    width: 50px;
+    text-align: center;
+    padding: 2px 10px;
+}
+
+.clid{
+    display: inline-block;
+    width: 150px;
+    text-align: center;
+    padding: 2px 10px;
+}
+
+.collid{
+    display: inline-block;
+    width: 150px;
+    text-align: center;
+    padding: 2px 10px;
+}
+
+.caid{
+    display: inline-block;
+    width: 150px;
+    text-align: center;
+    padding: 2px 10px;
+}
+
+.button{
+    display: inline-block;
+    width: 100px;
+    text-align: center;
+    padding: 2px 10px;
+}
+

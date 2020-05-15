@@ -89,6 +89,28 @@ class TeaService(object):
             course["achi_li"] = AchievementManage.get_by_cidgreat(cid)
         return course_li
 
+    # @staticmethod
+    # def submit_chg_achi(achi_li):
+    #     """提交修改成绩的通知"""
+    #     newachi_li = list()
+    #     for i in range(0, len(achi_li), 3):
+    #         try:
+    #             acid = int(achi_li[i])
+    #             isgreat = int(achi_li[i + 1])
+    #             grade = int(achi_li[i + 2])
+    #             achi = AchievementManage.get_by_id(acid)
+    #             if achi is None:
+    #                 return False
+    #             achi["newgrade"] = grade
+    #             achi["newisgreat"] = isgreat
+    #             newachi_li.append(achi)
+    #
+    #         except Exception as e:
+    #             print(e)
+    #             ExceptionLog.model_error(e.__str__())
+    #             return False
+    #
+
     @staticmethod
     def save_achi(achi_li):
         """保存成绩"""

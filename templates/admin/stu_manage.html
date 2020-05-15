@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <title>学生管理页面</title>
+    <link rel="stylesheet" href="/static/css/header.css">
+    <link rel="stylesheet" href="/static/css/footer.css">
+    <link rel="stylesheet" href="/static/css/stu_manage.css">
+    <script type="text/javascript" src="/static/js/jquery-3.4.1/jquery-3.4.1.min.js"></script>
+    <link rel='stylesheet' href='/static/css/bootstrap/css/bootstrap.min.css' />
+    <script type="text/javascript" src="/static/css/bootstrap/js/bootstrap.min.js"></script>
+    <meta name="viewport" ,content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+</head>
+
+<body>
+    {% import "header.html" as h_add%}
+    {{ h_add.header() }}
+    <div id="main">
+        <p>
+            学生选课权限设置
+            <ul id="nav" class="nav nav-pills">
+                <li class="active" tip="permission"><a href="#">选课权限设置</a></li>
+                <li tip="blacklist"><a href="#">禁止名单</a></li>
+            </ul>
+        </p>
+        <ul id="blacklist" class="show">
+            <li class="tip">
+                <span class="sno">账号</span>
+                <span class="sname">姓名</span>
+                <span class="ssex">性别</span>
+                <span class="clid">班级</span>
+                <span class="collid">学院</span>
+                <span class="caid">校区</span>
+            </li>
+            {% for stu in black_li %}
+            <input type="hidden" value={{stu}} class="ishide">
+            {% endfor %}
+            {% for stu in stu_li %}
+            <li cid="{{stu.id}}" class="list">
+                <span class="sno">{{stu.sno}}</span>
+                <span class="sname">{{stu.sname}}</span>
+                <span class="ssex">{{stu.ssex}}</span>
+                <span class="clid">{{stu.classname}}</span>
+                <span class="collid">{{stu.collegename}}</span>
+                <span class="caid">{{stu.campus}}</span>
+                <span class="button"><button cid="{{stu.id}}" class="btn btn-primary agree">解除</button></span>
+            </li>
+            {% endfor %}
+        </ul>
+        <ul id="permission" class="show">
+            <li class="tip">
+                <span class="sno">账号</span>
+                <span class="sname">姓名</span>
+                <span class="ssex">性别</span>
+                <span class="clid">班级</span>
+                <span class="collid">学院</span>
+                <span class="caid">校区</span>
+            </li>
+            {% for stu in stu_li %}
+            <li cid="{{stu.id}}">
+                <span class="sno">{{stu.sno}}</span>
+                <span class="sname">{{stu.sname}}</span>
+                <span class="ssex">{{stu.ssex}}</span>
+                <span class="clid">{{stu.classname}}</span>
+                <span class="collid">{{stu.collegename}}</span>
+                <span class="caid">{{stu.campus}}</span>
+                <span class="button"><button cid="{{stu.id}}" class="btn btn-danger refuse">禁止</button></span>
+            </li>
+            {% endfor %}
+        </ul>
+    </div>
+    {% import "footer.html" as f_add%}
+    {{ f_add.footer() }}
+    <script type="text/javascript" src="/static/js/stu_manage.js"></script>
+</body>
+
+</html>

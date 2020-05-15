@@ -1,0 +1,32 @@
+2020-05-15 17:14:51 : Invalid input of type: 'dict'. Convert to a bytes, string, int or float first.
+2020-05-15 17:15:29 : Object of type 'date' is not JSON serializable
+2020-05-15 20:28:00 : Invalid input of type: 'NoneType'. Convert to a bytes, string, int or float first.
+2020-05-15 20:29:43 : Invalid input of type: 'NoneType'. Convert to a bytes, string, int or float first.
+2020-05-15 20:29:46 : Invalid input of type: 'NoneType'. Convert to a bytes, string, int or float first.
+2020-05-15 20:30:53 : Invalid input of type: 'NoneType'. Convert to a bytes, string, int or float first.
+2020-05-15 22:02:24 : This Session's transaction has been rolled back due to a previous exception during flush. To begin a new transaction with this Session, first issue Session.rollback(). Original exception was: (pymysql.err.IntegrityError) (1062, "Duplicate entry '1-6' for key 'idx_selcourses_sid_cid'")
+[SQL: INSERT INTO selcourses (cretime, sid, cid) VALUES (%(cretime)s, %(sid)s, %(cid)s)]
+[parameters: {'cretime': '2020-05-15 22:02:16', 'sid': 1, 'cid': '6'}]
+(Background on this error at: http://sqlalche.me/e/gkpj) (Background on this error at: http://sqlalche.me/e/7s2a)
+2020-05-15 22:02:24 : This Session's transaction has been rolled back due to a previous exception during flush. To begin a new transaction with this Session, first issue Session.rollback(). Original exception was: (pymysql.err.IntegrityError) (1062, "Duplicate entry '1-6' for key 'idx_selcourses_sid_cid'")
+[SQL: INSERT INTO selcourses (cretime, sid, cid) VALUES (%(cretime)s, %(sid)s, %(cid)s)]
+[parameters: {'cretime': '2020-05-15 22:02:16', 'sid': 1, 'cid': '6'}]
+(Background on this error at: http://sqlalche.me/e/gkpj) (Background on this error at: http://sqlalche.me/e/7s2a)
+2020-05-15 22:02:25 : This Session's transaction has been rolled back due to a previous exception during flush. To begin a new transaction with this Session, first issue Session.rollback(). Original exception was: (pymysql.err.IntegrityError) (1062, "Duplicate entry '1-6' for key 'idx_selcourses_sid_cid'")
+[SQL: INSERT INTO selcourses (cretime, sid, cid) VALUES (%(cretime)s, %(sid)s, %(cid)s)]
+[parameters: {'cretime': '2020-05-15 22:02:16', 'sid': 1, 'cid': '6'}]
+(Background on this error at: http://sqlalche.me/e/gkpj) (Background on this error at: http://sqlalche.me/e/7s2a)
+2020-05-15 22:02:25 : This Session's transaction has been rolled back due to a previous exception during flush. To begin a new transaction with this Session, first issue Session.rollback(). Original exception was: (pymysql.err.IntegrityError) (1062, "Duplicate entry '1-6' for key 'idx_selcourses_sid_cid'")
+[SQL: INSERT INTO selcourses (cretime, sid, cid) VALUES (%(cretime)s, %(sid)s, %(cid)s)]
+[parameters: {'cretime': '2020-05-15 22:02:16', 'sid': 1, 'cid': '6'}]
+(Background on this error at: http://sqlalche.me/e/gkpj) (Background on this error at: http://sqlalche.me/e/7s2a)
+2020-05-15 22:02:27 : This Session's transaction has been rolled back due to a previous exception during flush. To begin a new transaction with this Session, first issue Session.rollback(). Original exception was: (pymysql.err.IntegrityError) (1062, "Duplicate entry '1-6' for key 'idx_selcourses_sid_cid'")
+[SQL: INSERT INTO selcourses (cretime, sid, cid) VALUES (%(cretime)s, %(sid)s, %(cid)s)]
+[parameters: {'cretime': '2020-05-15 22:02:16', 'sid': 1, 'cid': '6'}]
+(Background on this error at: http://sqlalche.me/e/gkpj) (Background on this error at: http://sqlalche.me/e/7s2a)
+2020-05-15 22:02:27 : This Session's transaction has been rolled back due to a previous exception during flush. To begin a new transaction with this Session, first issue Session.rollback(). Original exception was: (pymysql.err.IntegrityError) (1062, "Duplicate entry '1-6' for key 'idx_selcourses_sid_cid'")
+[SQL: INSERT INTO selcourses (cretime, sid, cid) VALUES (%(cretime)s, %(sid)s, %(cid)s)]
+[parameters: {'cretime': '2020-05-15 22:02:16', 'sid': 1, 'cid': '6'}]
+(Background on this error at: http://sqlalche.me/e/gkpj) (Background on this error at: http://sqlalche.me/e/7s2a)
+2020-05-15 22:39:44 : 'NoneType' object has no attribute 'course'
+2020-05-15 23:45:21 : 'NoneType' object has no attribute 'isend'

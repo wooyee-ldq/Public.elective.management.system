@@ -54,12 +54,17 @@ $(document).ready(function(){
                 },
                 success: function (msg) {
                     if(msg.bl == 200){
+                        var str = ""
                         for(let i = 0; i < msg.tip.length; i++){
                             cid = msg.tip[i]
                             seldiv = $("#pre div[cid="+cid+"]")
                             // seldiv.find("button").remove()
+                            str = str + "《" + seldiv.text() + "》 "
                             seldiv.find("button").removeClass("del").addClass("remove").text("退选")
                             $("#sel_course").append(seldiv)
+                            if(i == msg.tip.length-1){
+                                alert(str + "选课成功，选课成功4小时内可以退选!")
+                            }
                         }
                     }
                     $("#pre div").remove()

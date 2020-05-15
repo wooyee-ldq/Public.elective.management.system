@@ -57,8 +57,8 @@
                 </ul>
             </div>
             <div class="show" id="userman">
-                <li><a href="/adminConsole/students/" target="_blank">学生管理</a></li>
-                <li><a href="/adminConsole/teachers/" target="_blank">教师管理</a></li>
+                <li><a href="{{url_for('app_admin.stu_manage')}}" target="_blank">学生管理</a></li>
+                <li><a href="{{url_for('app_admin.tea_manage')}}" target="_blank">教师管理</a></li>
             </div>
             <div class="show" id="examineman">
                 <ul>
@@ -101,6 +101,12 @@
                 </ul>
             </div>
         </div>
+        <!-- <div id="side">
+            <p>消息</p>
+            <ul id="msg">
+                
+            </ul>
+        </div> -->
     </div>
     {% import "footer.html" as f_add%}
     {{ f_add.footer() }}

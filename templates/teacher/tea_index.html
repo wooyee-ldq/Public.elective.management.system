@@ -45,9 +45,15 @@
                     <div id="notice" class="carousel-inner">
                         {% for notice in notice_li %}
                             {% if notice == notice_li[0] %}
-                            <div class="item active">{{notice.text}}</div>
+                            <div class="item active">
+                                {{notice.text}}<br><br>
+                                {{notice.cretime}}
+                            </div>
                             {% else %}
-                            <div class="item">{{notice.text}}</div>
+                            <div class="item">
+                                {{notice.text}}<br><br>
+                                {{notice.cretime}}
+                            </div>
                             {% endif %}
                         {% endfor %}
                     </div>

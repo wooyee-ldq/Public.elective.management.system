@@ -151,6 +151,9 @@ def preview_page():
     if stu is None:
         return render_template("page404.html"), 404
 
+    if not RedisService.judgestu_iscan_selectcourse(stu.id):
+        return render_template("not_allow.html", message="你被禁止选课，有问题请联系管理员...")
+
     crd_sum = StuService.count_credit(stu.id)
     if crd_sum >= 33:
         return render_template("not_allow.html", message="所修学分已满，不需要选课...")
@@ -167,7 +170,7 @@ def preview_page():
     session["ctype"] = ctype
     session["week"] = week
 
-    course_li, sum, pagenum, page = StuService.get_preview_course(caid, ctype, week, page, 4)
+    course_li, sum, pagenum, page = StuService.get_preview_course(caid, ctype, week, page, 6)
     preview_li = StuService.get_predone(stu.sno)
 
     return render_template("student/preview_page.html",
@@ -215,6 +218,9 @@ def sel_course_page():
     if RedisService.judge_can_sel(stu) is False:
         return render_template("not_allow.html", message="不在选课时段，无法进行选课和退选...")
 
+    if not RedisService.judgestu_iscan_selectcourse(stu.id):
+        return render_template("not_allow.html", message="你被禁止选课，有问题请联系管理员...")
+
     crd_sum = StuService.count_credit(stu.id)
     if crd_sum >= 33:
         return render_template("not_allow.html", message="所修学分已满，不需要选课...")
@@ -228,7 +234,7 @@ def sel_course_page():
     session["ctype"] = ctype
     session["week"] = week
 
-    course_li, sum, pagenum, page = StuService.get_preview_course(caid, ctype, week, page, 4)
+    course_li, sum, pagenum, page = StuService.get_preview_course(caid, ctype, week, page, 16)
     preview_li = StuService.get_predone(stu.sno)
     sel_li = SelcourseManage.get_by_sidnoend(stu.id)
 
@@ -255,12 +261,12 @@ def sel_course():
     bl, cids = StuService.save_sel_course(stu.id, stu.sno, stu.caid, sel_li)
     if bl:
         return jsonify({
-            "tip": cids,
+            "tip": cids.split(","),
             "bl": 200
         })
     else:
         return jsonify({
-            "tip": cids,
+            "tip": cids.split(","),
             "bl": 400
         })
 

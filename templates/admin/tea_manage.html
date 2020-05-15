@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <title>教师管理页面</title>
+    <link rel="stylesheet" href="/static/css/header.css">
+    <link rel="stylesheet" href="/static/css/footer.css">
+    <link rel="stylesheet" href="/static/css/tea_manage.css">
+    <script type="text/javascript" src="/static/js/jquery-3.4.1/jquery-3.4.1.min.js"></script>
+    <link rel='stylesheet' href='/static/css/bootstrap/css/bootstrap.min.css' />
+    <script type="text/javascript" src="/static/css/bootstrap/js/bootstrap.min.js"></script>
+    <meta name="viewport" ,content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+</head>
+
+<body>
+    {% import "header.html" as h_add%}
+    {{ h_add.header() }}
+    <div id="main">
+        <p>
+            教师开课权限设置
+            <ul id="nav" class="nav nav-pills">
+                <li class="active" tip="permission"><a href="#">开课权限设置</a></li>
+                <li tip="blacklist"><a href="#">禁止名单</a></li>
+            </ul>
+        </p>
+        <ul id="blacklist" class="show">
+            <li class="tip">
+                <span class="tno">账号</span>
+                <span class="tname">姓名</span>
+                <span class="tsex">性别</span>
+                <span class="collid">学院</span>
+                <span class="caid">校区</span>
+            </li>
+            {% for tea in black_li %}
+            <input type="hidden" value={{tea}} class="ishide">
+            {% endfor %}
+            {% for tea in tea_li %}
+            <li cid="{{tea.id}}" class="list">
+                <span class="tno">{{tea.tno}}</span>
+                <span class="tname">{{tea.tname}}</span>
+                <span class="tsex">{{tea.tsex}}</span>
+                <span class="collid">{{tea.collegename}}</span>
+                <span class="caid">{{tea.campusname}}</span>
+                <span class="button"><button cid="{{tea.id}}" class="btn btn-primary agree">解除</button></span>
+            </li>
+            {% endfor %}
+        </ul>
+        <ul id="permission" class="show">
+            <li class="tip">
+                <span class="tno">账号</span>
+                <span class="tname">姓名</span>
+                <span class="tsex">性别</span>
+                <span class="collid">学院</span>
+                <span class="caid">校区</span>
+            </li>
+            {% for tea in tea_li %}
+            <li cid="{{tea.id}}">
+                <span class="tno">{{tea.tno}}</span>
+                <span class="tname">{{tea.tname}}</span>
+                <span class="tsex">{{tea.tsex}}</span>
+                <span class="collid">{{tea.collegename}}</span>
+                <span class="caid">{{tea.campusname}}</span>
+                <span class="button"><button cid="{{tea.id}}" class="btn btn-danger refuse">禁止</button></span>
+            </li>
+            {% endfor %}
+        </ul>
+    </div>
+    {% import "footer.html" as f_add%}
+    {{ f_add.footer() }}
+    <script type="text/javascript" src="/static/js/tea_manage.js"></script>
+</body>
+
+</html>

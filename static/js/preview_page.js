@@ -27,7 +27,6 @@ $(document).ready(function(){
         $(this).parent().remove()
     })
 
-
     // 预选提交按钮点击事件
     $("#preview").click(function(){
         var cid_li = new Array();
@@ -58,3 +57,22 @@ $(document).ready(function(){
     });
 
 })
+
+// function savepre(){
+//     var cid_li = new Array();
+//     $("#pre").find("div").each(function(){
+//         cid = $(this).attr("cid")
+//         cid_li.push(cid)
+//     })
+//     if(cid_li.length > 0){
+//         $.ajax({
+//             url: "/stu/preview",
+//             method: "post",
+//             async: true,
+//             dataType: "json",
+//             data: {
+//                 "cid_li": cid_li.toString()
+//             }
+//         })
+//     }
+// }

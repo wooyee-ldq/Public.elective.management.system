@@ -8,6 +8,7 @@ from Service.classroomManage import ClassroomManage
 from Service.loginCheck import LoginCheck
 from Service.achievementManage import AchievementManage
 from Service.noticeManage import NoticeManage
+from Service.redis_service import RedisService
 from Service.selcourseManage import SelcourseManage
 from Service.stuManage import StuManage
 from Service.courseManage import CourseManage
@@ -157,7 +158,7 @@ def achievement_change_page():
 
 @app_tea.route("/achievementChange", methods=["POST"])
 def achievement_change():
-    """学生成绩修改"""
+    """提交学生成绩修改操作"""
     tea = session.get("tea")
     if tea is None:
         return jsonify({
@@ -170,12 +171,12 @@ def achievement_change():
     if bl is True:
         return jsonify({
             "bl": 200,
-            "tip": "成绩保存成功！"
+            "tip": "成绩修改提交成功！"
         })
     else:
         return jsonify({
             "bl": 400,
-            "tip": "成绩保存失败！"
+            "tip": "成绩修改提交失败！"
         })
 
 
@@ -251,6 +252,9 @@ def course_apply_page():
         return render_template("page404.html"), 404
 
     tid = tea.id
+    if not RedisService.judgetea_iscan_applycourse(tid):
+        return render_template("not_allow.html", message="你被禁止开课，有问题请联系管理员...")
+
     course_li = CourseManage.get_by_tid_noend(tid)
     room_li = ClassroomManage.get_by_caid(tea.caid)
 

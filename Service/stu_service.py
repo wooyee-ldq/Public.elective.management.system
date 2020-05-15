@@ -106,8 +106,8 @@ class StuService(object):
         """保存学生选课信息"""
         ln = len(cid_li)
         if ln > 3:
-            return False, list()
-        cids = list()
+            return False, ""
+        cids = ""
         for i in range(ln):
             try:
                 cid = str(cid_li[i])
@@ -120,11 +120,14 @@ class StuService(object):
                                  cid=cid,
                                  cretime=time.strftime("%Y-%m-%d %H:%M:%S", time.localtime()))
                 db.session.add(sel)
-                cids.append(cid)
+                if i == ln-1:
+                    cids = cids + cid
+                else:
+                    cids = cids + cid + ","
 
             except Exception as e:
                 print(e)
-                return False, list()
+                return False, ""
 
         try:
             RedisService.save_sel(sno, cids)
@@ -133,7 +136,7 @@ class StuService(object):
             return True, cids
         except Exception as e:
             print(e)
-            return False, list()
+            return False, ""
 
     @staticmethod
     def remove_sel_course(sid, sno, cid, caid):

@@ -278,12 +278,24 @@ class RedisService(object):
             tip = "超过退课时间，退课失败！"
             if cids is None:
                 return False, tip
-            cids = str(cids)[1:-1]
-            cid_li = cids.split(",")
+            cid_li = str(cids).split(",")
             for cid1 in cid_li:
-                if str(cid) == cid1[1:-1]:
+                if str(cid) == cid1:
                     bl = cls.remove_sel(sid, cid, caid)
                     if bl:
+                        cid_li.remove(cid1)
+                        ln = len(cid_li)
+                        cids = ""
+                        if ln > 0:
+                            for i in range(ln):
+                                cid = str(cid_li[i])
+                                if i == ln - 1:
+                                    cids = cids + cid
+                                    continue
+                                cids = cids + cid + ","
+                            cls.save_sel(sno, cids)
+                        elif ln == 0:
+                            cls.save_sel(sno, "")
                         tip = "退课成功！"
                         return True, tip
                     else:
@@ -329,6 +341,113 @@ class RedisService(object):
             print(e)
             ExceptionLog.model_error(e.__str__())
             return list()
+
+    @staticmethod
+    def tea_agree(tid):
+        try:
+            r = MyRedis.get_redis()
+            r.lrem("teablacklist", 0, tid)
+            return True
+        except Exception as e:
+            ExceptionLog.model_error(e.__str__())
+            return False
+
+    @staticmethod
+    def tea_refuse(tid):
+        try:
+            r = MyRedis.get_redis()
+            r.lpush("teablacklist", tid)
+            return True
+        except Exception as e:
+            ExceptionLog.model_error(e.__str__())
+            return False
+
+    @staticmethod
+    def judgetea_iscan_applycourse(tid):
+        try:
+            r = MyRedis.get_redis()
+            tea_li = r.lrange("teablacklist", 0, -1)
+            if tea_li is None:
+                tea_li = list()
+            for tea in tea_li:
+                if tea == str(tid):
+                    return False
+            return True
+        except Exception as e:
+            ExceptionLog.model_error(e.__str__())
+            return False
+
+    @staticmethod
+    def judgestu_iscan_selectcourse(sid):
+        try:
+            r = MyRedis.get_redis()
+            stu_li = r.lrange("stublacklist", 0, -1)
+            if stu_li is None:
+                stu_li = list()
+            for stu in stu_li:
+                if stu == str(sid):
+                    return False
+            return True
+        except Exception as e:
+            ExceptionLog.model_error(e.__str__())
+            return False
+
+    @staticmethod
+    def stu_agree(sid):
+        try:
+            r = MyRedis.get_redis()
+            r.lrem("stublacklist", 0, sid)
+            return True
+        except Exception as e:
+            ExceptionLog.model_error(e.__str__())
+            return False
+
+    @staticmethod
+    def stu_refuse(sid):
+        try:
+            r = MyRedis.get_redis()
+            r.lpush("stublacklist", sid)
+            return True
+        except Exception as e:
+            ExceptionLog.model_error(e.__str__())
+            return False
+
+    @staticmethod
+    def get_tea_blacklist():
+        try:
+            r = MyRedis.get_redis()
+            tea_li = r.lrange("teablacklist", 0, -1)
+            if tea_li is None:
+                tea_li = list()
+            return tea_li
+        except Exception as e:
+            ExceptionLog.model_error(e.__str__())
+            return list()
+
+    @staticmethod
+    def get_stu_blacklist():
+        try:
+            r = MyRedis.get_redis()
+            stu_li = r.lrange("stublacklist", 0, -1)
+            if stu_li is None:
+                stu_li = list()
+            return stu_li
+        except Exception as e:
+            ExceptionLog.model_error(e.__str__())
+            return list()
+
+
+     # @staticmethod
+     # def add_new_admintip(self, ):
+
+
+
+
+
+
+
+
+
 
     # @staticmethod
     # def load_selcourse():
